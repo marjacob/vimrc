@@ -1,5 +1,3 @@
-SHELL := /bin/bash
-
 github   := raw.githubusercontent.com
 dotvim   := $(HOME)/.vim
 dotvimrc := $(HOME)/.vimrc
