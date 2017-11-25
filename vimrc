@@ -13,7 +13,7 @@ endif
 
 """"" Plugins """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-call plug#begin('~/.vim/plugins')
+call plug#begin('~/.vim/plugged')
 
 Plug 'Raimondi/delimitMate'
 Plug 'altercation/vim-colors-solarized'
