@@ -18,16 +18,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'Raimondi/delimitMate'
 Plug 'altercation/vim-colors-solarized'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-sensible'
 
 call plug#end()
-
-" CtrlP
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_user_command = [
-			\'.git/',
-			\'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " DelimitMate
 " Remove <> (<:>).
@@ -178,7 +171,7 @@ function! SetCurrentBuffer()
 
 endfunction
 
-nnoremap <silent> <Leader>b :call SetCurrentBuffer()<CR>
+nnoremap <silent> <Leader>bb :call SetCurrentBuffer()<CR>
 nnoremap <silent> <Leader>bn :bn<CR>
 nnoremap <silent> <Leader>bp :bp<CR>
 
