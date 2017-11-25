@@ -33,10 +33,11 @@ upgrade:
 
 $(dotvimrc): vimrc
 	@cp -p "$(<)" "$(@)"
-	@chmod 655 "$(@)"
+	@chmod 644 "$(@)"
 
 $(dotvim)/autoload/plug.vim: $(dotvim)/autoload $(dotvim)/plugged
 	@curl -fLo "$(@)" "https://$(github)/junegunn/vim-plug/master/plug.vim"
+	@chmod 644 "$(@)"
 
 $(dotvim)/autoload: $(dotvim)
 	@mkdir -m 755 -p "$(@)"
