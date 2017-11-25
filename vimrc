@@ -45,7 +45,7 @@ if has('gui_running')
 	colorscheme solarized
 
 	if !exists('g:vimrc_loaded')
-		set columns=85
+		set columns=90
 		set lines=32
 	endif
 
