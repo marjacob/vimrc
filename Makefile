@@ -32,7 +32,8 @@ upgrade:
 	@vim +PlugUpgrade +qall
 
 $(dotvimrc): vimrc
-	@install -B "$(USER)" -b -c -m 655 -p -S "$(<)" "$(@)"
+	@cp -p "$(<)" "$(@)"
+	@chmod 655 "$(@)"
 
 $(dotvim)/autoload/plug.vim: $(dotvim)/autoload $(dotvim)/plugged
 	@curl -fLo "$(@)" "https://$(github)/junegunn/vim-plug/master/plug.vim"
