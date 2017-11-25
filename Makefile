@@ -9,7 +9,8 @@ help:
 	@echo " make [target]"
 	@echo
 	@echo "Targets:"
-	@echo " clean   Remove unused directories"
+	@echo " clean   Remove unused plugins"
+	@echo " destroy Remove ~/.vimrc and ~/.vim"
 	@echo " install Install vimrc and vim-plug"
 	@echo " update  Upgrade plugins"
 	@echo " upgrade Upgrade vim-plug"
@@ -18,6 +19,11 @@ help:
 .PHONY: clean
 clean:
 	@vim +PlugClean! +qall
+
+.PHONY: destroy
+destroy:
+	rm -f "$(dotvimrc)"
+	rm -rf "$(dotvim)"
 
 .PHONY: install
 install: $(dotvimrc) $(dotvim)/autoload/plug.vim
