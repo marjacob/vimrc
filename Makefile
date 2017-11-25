@@ -1,37 +1,50 @@
 SHELL := /bin/bash
 
-vim   := $(HOME)/.vim
-vimrc := $(HOME)/.vimrc
+github   := raw.githubusercontent.com
+dotvim   := $(HOME)/.vim
+dotvimrc := $(HOME)/.vimrc
 
-all: install
+.PHONY: help
+help:
+	@echo
+	@echo "Usage:"
+	@echo " make [target]"
+	@echo
+	@echo "Targets:"
+	@echo " clean   Remove unused directories"
+	@echo " install Install vimrc and vim-plug"
+	@echo " update  Upgrade plugins"
+	@echo " upgrade Upgrade vim-plug"
+	@echo
+
+.PHONY: clean
+clean:
+	@vim +PlugClean! +qall
 
 .PHONY: install
-install: $(vimrc) $(vim)/autoload/plug.vim
-	vim +PlugInstall +qall
+install: $(dotvimrc) $(dotvim)/autoload/plug.vim
+	@vim +PlugInstall +qall
 
 .PHONY: update
 update:
-	vim +PlugUpdate +qall
+	@vim +PlugUpdate +qall
 
 .PHONY: upgrade
 upgrade:
-	vim +PlugUpgrade +qall
+	@vim +PlugUpgrade +qall
 
-$(vimrc): vimrc
-	install -B "$(USER)" -b -c -m 655 -S "$(<)" "$(@)"
+$(dotvimrc): vimrc
+	@install -B "$(USER)" -b -c -m 655 -p -S "$(<)" "$(@)"
 
-$(vim)/autoload/plug.vim: $(vim)/autoload $(vim)/plugins
-	curl -fLo "$(@)" \
-		"https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+$(dotvim)/autoload/plug.vim: $(dotvim)/autoload $(dotvim)/plugged
+	@curl -fLo "$(@)" "https://$(github)/junegunn/vim-plug/master/plug.vim"
 
-$(vim)/autoload: $(vim)
-	mkdir -p "$(@)"
+$(dotvim)/autoload: $(dotvim)
+	@mkdir -m 755 -p "$(@)"
 
-$(vim)/plugins: $(vim)
-	mkdir -p "$(@)"
+$(dotvim)/plugged: $(dotvim)
+	@mkdir -m 755 -p "$(@)"
 
-$(vim): $(HOME)
-	mkdir -p "$(@)"
-
-#uninstall:
+$(dotvim): $(HOME)
+	@mkdir -m 755 -p "$(@)"
 
