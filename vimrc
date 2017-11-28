@@ -13,7 +13,11 @@ endif
 
 """"" Plugins """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-call plug#begin('~/.vim/plugged')
+if has('win32')
+	call plug#begin('~/vimfiles/plugged')
+else
+	call plug#begin('~/.vim/plugged')
+endif
 
 Plug 'Raimondi/delimitMate'
 Plug 'altercation/vim-colors-solarized'
@@ -66,7 +70,7 @@ if has('gui_running')
 	elseif has('unix')
 		set guifont=Monospace\ 12
 	elseif has('win32')
-		set guifont=Consolas:h14:cANSI
+		set guifont=Consolas:h12:cANSI
 		set linespace=0
 	endif
 endif
