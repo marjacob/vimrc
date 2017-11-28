@@ -10,6 +10,7 @@ help:
 	@echo " make [target]"
 	@echo
 	@echo "Targets:"
+	@echo " archive Create $(vimfiles) (requires install)"
 	@echo " clean   Remove unused plugins"
 	@echo " destroy Remove ~/.vimrc and ~/.vim"
 	@echo " install Install vimrc and vim-plug"
