@@ -9,17 +9,19 @@ PUSHD "%~dp0"
 
 :: Install configuration file.
 COPY /V /Y "vimrc" "%vimrc%"
-ATTRIB +H "%vimrc%"
 
 :: Install configuration directory.
 XCOPY "vim" "%vimfiles%" /E /I /H /Y
-ATTRIB +H "%vimfiles%"
 
 :: Install empty history file.
 IF NOT EXIST "%viminfo%" (
 	COPY /Y NUL "%viminfo%" >NUL
-	ATTRIB +H "%viminfo%"
 )
+
+:: Hide installed files.
+ATTRIB +H "%vimfiles%"
+ATTRIB +H "%viminfo%"
+ATTRIB +H "%vimrc%"
 
 :: Move to initial working directory.
 POPD
