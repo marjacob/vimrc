@@ -1,28 +1,46 @@
-@ECHO OFF
+@echo off
 
-SET vimrc=%USERPROFILE%\_vimrc
-SET vimfiles=%USERPROFILE%\vimfiles
-SET viminfo=%USERPROFILE%\_viminfo
+set self=%~nx0
+set vimrc=%userprofile%\_vimrc
+set vimfiles=%userprofile%\vimfiles
+set viminfo=%userprofile%\_viminfo
+
+where git >nul 2>&1
+
+if not errorlevel 0 (
+	echo.
+	echo   MISSING REQUIREMENT
+	echo     Git is required by the plugin manager
+	echo.
+	echo   INSTALL
+	echo     1. Install Git from https://git-scm.com/download/win
+	echo     2. Select "Use Git from the Windows Command Prompt"
+	echo     3. Execute "%self%" in a new command prompt instance
+	echo     4. Execute :PlugInstall in Vim
+	echo.
+
+	exit /b 1
+)
 
 :: Move to script directory.
-PUSHD "%~dp0"
+pushd "%~dp0"
 
 :: Install configuration file.
-COPY /V /Y "vimrc" "%vimrc%"
+copy /v /y "vimrc" "%vimrc%"
 
 :: Install configuration directory.
-XCOPY "vim" "%vimfiles%" /E /I /H /Y
+xcopy "vim" "%vimfiles%" /e /i /h /y
 
 :: Install empty history file.
-IF NOT EXIST "%viminfo%" (
-	COPY /Y NUL "%viminfo%" >NUL
+if not exist "%viminfo%" (
+	copy /y nul "%viminfo%" >nul
 )
 
 :: Hide installed files.
-ATTRIB +H "%vimfiles%"
-ATTRIB +H "%viminfo%"
-ATTRIB +H "%vimrc%"
+attrib +h "%vimfiles%"
+attrib +h "%viminfo%"
+attrib +h "%vimrc%"
 
 :: Move to initial working directory.
-POPD
+popd
 
