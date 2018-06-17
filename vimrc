@@ -2,8 +2,8 @@
 
 if has('vim_starting')
   runtime! bundle/vim-pathogen/autoload/pathogen.vim
-  silent! execute pathogen#infect("vendor/{}")
   silent! execute pathogen#infect("bundle/{}")
+  silent! execute pathogen#infect("vendor/{}")
 endif
 
 if has('win32') || has ('win64')
