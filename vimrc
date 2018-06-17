@@ -29,10 +29,11 @@ endif
 
 " vim-airline/vim-airline
 if has('gui_running')
-  let g:airline#extensions#tabline#enabled = 1
   let g:airline_solarized_bg='dark'
   let g:airline_theme='solarized'
 endif
+
+let g:airline#extensions#tabline#enabled = 1
 
 " Raimondi/delimitMate
 " Remove <> (<:>).
@@ -149,6 +150,17 @@ else
 endif
 
 """"" Buffers """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! RefreshUI()
+
+  if exists(':AirlineRefresh')
+    AirlineRefresh
+  else
+    redraw!
+    redrawstatus!
+  endif
+
+endfunction
 
 function! SetCurrentBuffer()
 
@@ -283,7 +295,7 @@ if has('autocmd')
   augroup end
   augroup filetype_vimrc
     autocmd!
-    autocmd BufWritePost $MYVIMRC source % | AirlineRefresh
+    autocmd BufWritePost $MYVIMRC source % | :call RefreshUI()
     autocmd FileType vim setlocal keywordprg=:help
   augroup end
   augroup filetype_yaml
