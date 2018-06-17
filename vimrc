@@ -1,3 +1,17 @@
+" ~/.vimrc
+
+if has('vim_starting')
+  runtime! bundle/vim-pathogen/autoload/pathogen.vim
+  silent! execute pathogen#infect("vendor/{}")
+  silent! execute pathogen#infect("bundle/{}")
+endif
+
+if has('win32') || has ('win64')
+	let $VIMHOME = $VIM."/vimfiles"
+else
+	let $VIMHOME = $HOME."/.vim"
+endif
+
 set nocompatible 
 let mapleader = ","
 nnoremap \ ,
@@ -12,19 +26,6 @@ if has('multi_byte')
 endif
 
 """"" Plugins """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-if has('win32')
-	call plug#begin('~/vimfiles/plugged')
-else
-	call plug#begin('~/.vim/plugged')
-endif
-
-Plug 'Raimondi/delimitMate'
-Plug 'altercation/vim-colors-solarized'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-sensible'
-
-call plug#end()
 
 " DelimitMate
 " Remove <> (<:>).
@@ -41,6 +42,10 @@ set t_Co=256
 
 if has('extra_search')
 	set hlsearch
+endif
+
+if has('syntax')
+	set colorcolumn=+1,100
 endif
 
 silent! colorscheme desert
@@ -75,13 +80,8 @@ if has('gui_running')
 	endif
 endif
 
-if has('syntax')
-	set colorcolumn=+1,100
-endif
-
 """"" General """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set autoread
 set clipboard+=unnamed
 set fileformat=unix
 set fileformats=unix,dos
@@ -119,7 +119,11 @@ if has('vertsplit')
 	set splitright
 endif
 
-if has ('virtualedit')
+if has('viminfo')
+	set viminfo='1000,n$VIMHOME/viminfo
+endif
+
+if has('virtualedit')
 	set virtualedit=block
 endif
 
@@ -175,7 +179,9 @@ function! SetCurrentBuffer()
 
 endfunction
 
+nnoremap <silent> <Leader>bD :bd!<CR>
 nnoremap <silent> <Leader>bb :call SetCurrentBuffer()<CR>
+nnoremap <silent> <Leader>bd :bd<CR>
 nnoremap <silent> <Leader>bn :bn<CR>
 nnoremap <silent> <Leader>bp :bp<CR>
 
@@ -242,6 +248,7 @@ inoreabbr mprod ∏
 inoreabbr msqrt √
 inoreabbr msum ∑
 inoreabbr mtherefore ∴
+inoreabbr mthrow (╯°□°）╯︵ ┻━┻
 inoreabbr munion ∪
 inoreabbr mxor ⊕
 inoreabbr samfisher ∴
@@ -276,5 +283,8 @@ endif
 
 let g:vimrc_loaded = 'yes'
 
-" vim:fen:fdm=marker:fmr={{,}}:fcl=all:fdl=0::ts=2:sw=2:sts=2:
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
 
+" vim:fen:fdm=marker:fmr={{,}}:fcl=all:fdl=0::ts=2:sw=2:sts=2:
