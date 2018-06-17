@@ -7,27 +7,34 @@ if has('vim_starting')
 endif
 
 if has('win32') || has ('win64')
-	let $VIMHOME = $VIM."/vimfiles"
+  let $VIMHOME = $VIM."/vimfiles"
 else
-	let $VIMHOME = $HOME."/.vim"
+  let $VIMHOME = $HOME."/.vim"
 endif
 
-set nocompatible 
+set nocompatible
 let mapleader = ","
 nnoremap \ ,
 
 """"" Encoding """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if has('multi_byte')
-	set encoding=utf-8
-	scriptencoding utf8
-	setlocal fileencoding=utf-8
-	setlocal fileencodings=utf-8,latin1,default
+  set encoding=utf-8
+  scriptencoding utf8
+  setlocal fileencoding=utf-8
+  setlocal fileencodings=utf-8,latin1,default
 endif
 
 """"" Plugins """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" DelimitMate
+" vim-airline/vim-airline
+if has('gui_running')
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline_solarized_bg='dark'
+  let g:airline_theme='solarized'
+endif
+
+" Raimondi/delimitMate
 " Remove <> (<:>).
 let delimitMate_matchpairs = "(:),[:],{:}"
 let delimitMate_quotes = ""
@@ -41,43 +48,43 @@ set numberwidth=5
 set t_Co=256
 
 if has('extra_search')
-	set hlsearch
+  set hlsearch
 endif
 
 if has('syntax')
-	set colorcolumn=+1,100
+  set colorcolumn=+1,100
 endif
 
 silent! colorscheme desert
 
 if has('gui_running')
-	colorscheme solarized
+  colorscheme solarized
 
-	if !exists('g:vimrc_loaded')
-		set columns=90
-		set lines=32
-	endif
+  if !exists('g:vimrc_loaded')
+    set columns=90
+    set lines=32
+  endif
 
-	set guioptions+=a
-	set guioptions+=c
-	set guioptions-=L
-	set guioptions-=R
-	set guioptions-=T
-	set guioptions-=b
-	set guioptions-=e
-	set guioptions-=f
-	set guioptions-=l
-	set guioptions-=m
-	set guioptions-=r
+  set guioptions+=a
+  set guioptions+=c
+  set guioptions-=L
+  set guioptions-=R
+  set guioptions-=T
+  set guioptions-=b
+  set guioptions-=e
+  set guioptions-=f
+  set guioptions-=l
+  set guioptions-=m
+  set guioptions-=r
 
-	if has('mac')
-		set guifont=Monaco:h12,Inconsolata:h15
-	elseif has('unix')
-		set guifont=Monospace\ 12
-	elseif has('win32')
-		set guifont=Consolas:h12:cANSI
-		set linespace=0
-	endif
+  if has('mac')
+    set guifont=Monaco:h12,Inconsolata:h15
+  elseif has('unix')
+    set guifont=Monospace\ 12
+  elseif has('win32')
+    set guifont=Consolas:h12:cANSI
+    set linespace=0
+  endif
 endif
 
 """"" General """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -89,6 +96,8 @@ set formatoptions+=ro
 set hidden
 set ignorecase
 set infercase
+set list
+set listchars=tab:>·,trail:·
 set magic
 set mouse=a
 set noswapfile
@@ -102,80 +111,80 @@ set wildmode=list:longest,full
 set notimeout ttimeout
 
 if has('autochdir')
-	set noautochdir
+  set noautochdir
 endif
 
 if has('cindent')
-	set cindent
+  set cindent
 endif
 
 if has('folding')
-	set foldclose=all
-	set foldlevel=0
-	set nofoldenable
+  set foldclose=all
+  set foldlevel=0
+  set nofoldenable
 endif
 
 if has('vertsplit')
-	set splitright
+  set splitright
 endif
 
 if has('viminfo')
-	set viminfo='1000,n$VIMHOME/viminfo
+  set viminfo='1000,n$VIMHOME/viminfo
 endif
 
 if has('virtualedit')
-	set virtualedit=block
+  set virtualedit=block
 endif
 
 """"" Bell """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Disable audible and visual bell.
 if has('gui_running')
-	if has('autocmd')
-		augroup disable_bell
-			autocmd!
-			autocmd GUIEnter * set noerrorbells visualbell t_vb=
-		augroup end
-	endif
+  if has('autocmd')
+    augroup disable_bell
+      autocmd!
+      autocmd GUIEnter * set noerrorbells visualbell t_vb=
+    augroup end
+  endif
 else
-	set noerrorbells visualbell t_vb=
+  set noerrorbells visualbell t_vb=
 endif
 
 """"" Buffers """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! SetCurrentBuffer()
 
-	" Show buffer list.
-	let l:more = &more
-	set nomore
-	echo
-	ls
-	let &more = l:more
+  " Show buffer list.
+  let l:more = &more
+  set nomore
+  echo
+  ls
+  let &more = l:more
 
-	call inputsave()
+  call inputsave()
 
-	" Try asking the user for a buffer number or name.
-	try
-		let l:buffer = input("\nBuffer: ")
-	catch /^Vim:Interrupt$/
-		" Success: User issued CTRL-C.
-		return 1
-	finally
-		call inputrestore()
-	endtry
+  " Try asking the user for a buffer number or name.
+  try
+    let l:buffer = input("\nBuffer: ")
+  catch /^Vim:Interrupt$/
+    " Success: User issued CTRL-C.
+    return 1
+  finally
+    call inputrestore()
+  endtry
 
-	" Try switching to the specified buffer.
-	try
-		execute 'buffer' l:buffer
-	catch /^Vim\%((\a\+)\)\=:E86/	
-		" Failure: Buffer does not exist.
-		return 0
-	catch /^Vim\%((\a\+)\)\=:E93/	
-		" Failure: More than one match.
-		return 0
-	endtry
+  " Try switching to the specified buffer.
+  try
+    execute 'buffer' l:buffer
+  catch /^Vim\%((\a\+)\)\=:E86/
+    " Failure: Buffer does not exist.
+    return 0
+  catch /^Vim\%((\a\+)\)\=:E93/
+    " Failure: More than one match.
+    return 0
+  endtry
 
-	return 1
+  return 1
 
 endfunction
 
@@ -189,11 +198,11 @@ nnoremap <silent> <Leader>bp :bp<CR>
 
 " Set default indentation options unless sourced.
 if !exists('g:vimrc_loaded')
-	set noexpandtab
-	set shiftwidth=8
-	set softtabstop=8
-	set tabstop=8
-	set textwidth=79
+  set noexpandtab
+  set shiftwidth=8
+  set softtabstop=8
+  set tabstop=8
+  set textwidth=79
 endif
 
 """"" Mappings """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -256,37 +265,37 @@ inoreabbr samfisher ∴
 """"" Filetypes """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if has('autocmd')
-	augroup filetype_c
-		autocmd!
-		autocmd BufRead,BufNewFile *.h set filetype=c
-		autocmd FileType c setlocal shiftwidth=8
-		autocmd FileType c setlocal tabstop=8
-	augroup end
-	augroup filetype_help
-		autocmd!
-		autocmd FileType help setlocal keywordprg=:help
-	augroup end
-	augroup filetype_sieve
-		autocmd!
-		autocmd BufRead,BufNewFile *.sieve set filetype=sieve
-		autocmd FileType sieve setlocal expandtab
-		autocmd FileType sieve setlocal shiftwidth=2
-		autocmd FileType sieve setlocal softtabstop=2
-		autocmd FileType sieve setlocal tabstop=2
-	augroup end
-	augroup filetype_vimrc
-		autocmd!
-		autocmd BufWritePost $MYVIMRC source %
-		autocmd FileType vim setlocal keywordprg=:help
-	augroup end
-	augroup filetype_yaml
-		autocmd!
-		autocmd BufRead,BufNewFile *.sls set filetype=yaml
-		autocmd FileType yaml setlocal expandtab
-		autocmd FileType yaml setlocal shiftwidth=2
-		autocmd FileType yaml setlocal softtabstop=2
-		autocmd FileType yaml setlocal tabstop=2
-	augroup end
+  augroup filetype_c
+    autocmd!
+    autocmd BufRead,BufNewFile *.h set filetype=c
+    autocmd FileType c setlocal shiftwidth=8
+    autocmd FileType c setlocal tabstop=8
+  augroup end
+  augroup filetype_help
+    autocmd!
+    autocmd FileType help setlocal keywordprg=:help
+  augroup end
+  augroup filetype_sieve
+    autocmd!
+    autocmd BufRead,BufNewFile *.sieve set filetype=sieve
+    autocmd FileType sieve setlocal expandtab
+    autocmd FileType sieve setlocal shiftwidth=2
+    autocmd FileType sieve setlocal softtabstop=2
+    autocmd FileType sieve setlocal tabstop=2
+  augroup end
+  augroup filetype_vimrc
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source % | AirlineRefresh
+    autocmd FileType vim setlocal keywordprg=:help
+  augroup end
+  augroup filetype_yaml
+    autocmd!
+    autocmd BufRead,BufNewFile *.sls set filetype=yaml
+    autocmd FileType yaml setlocal expandtab
+    autocmd FileType yaml setlocal shiftwidth=2
+    autocmd FileType yaml setlocal softtabstop=2
+    autocmd FileType yaml setlocal tabstop=2
+  augroup end
 endif
 
 let g:vimrc_loaded = 'yes'
@@ -295,4 +304,4 @@ if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
 
-" vim:fen:fdm=marker:fmr={{,}}:fcl=all:fdl=0::ts=2:sw=2:sts=2:
+" vim:et:fen:fdm=marker:fmr={{,}}:fcl=all:fdl=0::ts=2:sw=2:sts=2:
