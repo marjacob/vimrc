@@ -42,11 +42,9 @@ let delimitMate_quotes = ""
 
 """"" Appearance """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set background=dark
 set laststatus=2
 set number
 set numberwidth=5
-set t_Co=256
 
 if has('extra_search')
   set hlsearch
