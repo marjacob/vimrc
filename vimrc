@@ -96,8 +96,6 @@ set formatoptions+=ro
 set hidden
 set ignorecase
 set infercase
-set list
-set listchars=tab:>·,trail:·
 set magic
 set mouse=a
 set noswapfile
