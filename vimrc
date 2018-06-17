@@ -97,6 +97,7 @@ set ignorecase
 set infercase
 set magic
 set mouse=a
+set noshowmode
 set noswapfile
 set nowrap
 set report=0
