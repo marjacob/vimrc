@@ -266,6 +266,14 @@ if has('autocmd')
 		autocmd!
 		autocmd FileType help setlocal keywordprg=:help
 	augroup end
+	augroup filetype_sieve
+		autocmd!
+		autocmd BufRead,BufNewFile *.sieve set filetype=sieve
+		autocmd FileType sieve setlocal expandtab
+		autocmd FileType sieve setlocal shiftwidth=2
+		autocmd FileType sieve setlocal softtabstop=2
+		autocmd FileType sieve setlocal tabstop=2
+	augroup end
 	augroup filetype_vimrc
 		autocmd!
 		autocmd BufWritePost $MYVIMRC source %
