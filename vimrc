@@ -51,7 +51,7 @@ if has('extra_search')
 endif
 
 if has('syntax')
-  set colorcolumn=+1,100
+  set colorcolumn=+1,99
 endif
 
 silent! colorscheme desert
