@@ -219,9 +219,6 @@ endif
 " Exit insert mode.
 inoremap jj <ESC>
 
-" Clear search highlighting and any message already displayed.
-nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
-
 " Redo failed paste properly.
 " 1) Undo last change.
 " 2) Enable paste mode.
