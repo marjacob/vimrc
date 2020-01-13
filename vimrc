@@ -1,22 +1,10 @@
 " ~/.vimrc
 
-if has('vim_starting')
-  runtime! bundle/vim-pathogen/autoload/pathogen.vim
-  silent! execute pathogen#infect("bundle/{}")
-  silent! execute pathogen#infect("vendor/{}")
-endif
-
-if has('win32') || has ('win64')
-  let $VIMHOME = $VIM."/vimfiles"
-else
-  let $VIMHOME = $HOME."/.vim"
-endif
-
 set nocompatible
 let mapleader = ","
 nnoremap \ ,
 
-""""" Encoding """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ..... Encoding ..............................................................
 
 if has('multi_byte')
   set encoding=utf-8
@@ -25,22 +13,45 @@ if has('multi_byte')
   setlocal fileencodings=utf-8,latin1,default
 endif
 
-""""" Plugins """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ..... Plugins ...............................................................
 
 " vim-airline/vim-airline
-if has('gui_running')
-  let g:airline_solarized_bg='dark'
-  let g:airline_theme='solarized'
-endif
-
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='solarized'
 
 " Raimondi/delimitMate
 " Remove <> (<:>).
 let delimitMate_matchpairs = "(:),[:],{:}"
 let delimitMate_quotes = ""
 
-""""" Appearance """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" prabirshrestha/asyncomplete.vim
+if executable('pyls')
+  " pip install python-language-server
+  augroup lsp_python
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'pyls',
+          \ 'cmd': {server_info->['pyls']},
+          \ 'whitelist': ['python'],
+          \ })
+  augroup end
+endif
+
+if executable('rls')
+  " rustup update
+  " rustup component add rls rust-analysis rust-src
+  augroup lsp_rust
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'rls',
+          \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+          \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
+          \ 'whitelist': ['rust'],
+          \ })
+  augroup end
+endif
+
+" ..... Appearance ............................................................
 
 set laststatus=2
 set number
@@ -58,6 +69,7 @@ silent! colorscheme desert
 
 if has('gui_running')
   colorscheme solarized
+  set background=light
 
   if !exists('g:vimrc_loaded')
     set columns=90
@@ -81,12 +93,17 @@ if has('gui_running')
   elseif has('unix')
     set guifont=Monospace\ 12
   elseif has('win32')
-    set guifont=Consolas:h12:cANSI
+    set guifont=Fira\ Code:h11,Consolas:h12:cANSI
     set linespace=0
+
+    " https://github.com/tonsky/FiraCode/issues/462
+    if &encoding == 'utf-8' && &guifont =~? 'Fira Code'
+      set renderoptions=type:directx
+    endif
   endif
 endif
 
-""""" General """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ..... General ...............................................................
 
 set clipboard+=unnamed
 set fileformat=unix
@@ -102,6 +119,7 @@ set noswapfile
 set nowrap
 set report=0
 set shortmess+=I
+set splitright
 set ttyfast
 set wildmode=list:longest,full
 
@@ -134,7 +152,7 @@ if has('virtualedit')
   set virtualedit=block
 endif
 
-""""" Bell """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ..... Bell ..................................................................
 
 " Disable audible and visual bell.
 if has('gui_running')
@@ -148,21 +166,35 @@ else
   set noerrorbells visualbell t_vb=
 endif
 
-""""" Buffers """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ..... Buffers ...............................................................
+
+" Redo failed paste properly.
+function! RetryPaste()
+  " Undo last change.
+  execute 'normal u'
+  " Enable paste mode.
+  let l:paste = &paste
+  set paste
+  " Repeat last change.
+  execute 'normal .'
+  " Disable paste mode unless previously enabled.
+  if paste == 0
+      set nopaste
+  endif
+  " Move cursor to last position in insert mode.
+  execute 'normal gi'
+endfunction
 
 function! RefreshUI()
-
   if exists(':AirlineRefresh')
     AirlineRefresh
   else
     redraw!
     redrawstatus!
   endif
-
 endfunction
 
 function! SetCurrentBuffer()
-
   " Show buffer list.
   let l:more = &more
   set nomore
@@ -194,7 +226,6 @@ function! SetCurrentBuffer()
   endtry
 
   return 1
-
 endfunction
 
 nnoremap <silent> <Leader>bD :bd!<CR>
@@ -203,7 +234,7 @@ nnoremap <silent> <Leader>bd :bd<CR>
 nnoremap <silent> <Leader>bn :bn<CR>
 nnoremap <silent> <Leader>bp :bp<CR>
 
-""""" Indentation """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ..... Indentation ...........................................................
 
 " Set default indentation options unless sourced.
 if !exists('g:vimrc_loaded')
@@ -214,24 +245,34 @@ if !exists('g:vimrc_loaded')
   set textwidth=79
 endif
 
-""""" Mappings """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ..... Mappings ..............................................................
+
+" prabirshrestha/asyncomplete.vim
+imap <C-space> <Plug>(asyncomplete_force_refresh)
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+
+" Split navigation mappings.
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
 
 " Exit insert mode.
 inoremap jj <ESC>
 
 " Redo failed paste properly.
-" 1) Undo last change.
-" 2) Enable paste mode.
-" 3) Repeat last change.
-" 4) Disable paste mode.
-" 5) Move cursor to last position in insert mode.
-nnoremap <silent> <Leader>a u:set paste<CR>.:set nopaste<CR>gi
+nnoremap <silent> <Leader>a :call RetryPaste()<CR>
 
 " Open .bashrc in current buffer.
 nnoremap <silent> <Leader>eb :e! ~/.bashrc<CR>
 
 " Open .gitconfig in current buffer.
 nnoremap <silent> <Leader>eg :e! ~/.gitconfig<CR>
+
+" Open .profile in current buffer.
+nnoremap <silent> <Leader>ep :e! ~/.profile<CR>
 
 " Open .ssh/config in current buffer.
 nnoremap <silent> <Leader>es :e! ~/.ssh/config<CR>
@@ -242,7 +283,7 @@ nnoremap <silent> <Leader>et :e! ~/.tmux.conf<CR>
 " Open .vimrc in current buffer.
 nnoremap <silent> <Leader>ev :e! $MYVIMRC<CR>
 
-""""" Symbols """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ..... Symbols ...............................................................
 
 inoreabbr mdefinedas ≜
 inoreabbr mdelta ∂
@@ -263,6 +304,7 @@ inoreabbr mlogor ∧
 inoreabbr mnequal ≠
 inoreabbr mnotelemnin ∉
 inoreabbr mprod ∏
+inoreabbr mshrug ¯\_(ツ)_/¯
 inoreabbr msqrt √
 inoreabbr msum ∑
 inoreabbr mtherefore ∴
@@ -271,12 +313,12 @@ inoreabbr munion ∪
 inoreabbr mxor ⊕
 inoreabbr samfisher ∴
 
-""""" Filetypes """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ..... Filetypes .............................................................
 
 if has('autocmd')
   augroup filetype_c
     autocmd!
-    autocmd BufRead,BufNewFile *.h set filetype=c
+    autocmd BufNewFile,BufRead *.h setlocal filetype=c
     autocmd FileType c setlocal shiftwidth=8
     autocmd FileType c setlocal tabstop=8
   augroup end
@@ -284,9 +326,25 @@ if has('autocmd')
     autocmd!
     autocmd FileType help setlocal keywordprg=:help
   augroup end
+  augroup filetype_markdown
+    autocmd!
+    autocmd FileType markdown setlocal colorcolumn=""
+    autocmd FileType markdown setlocal linebreak nolist wrap
+  augroup end
+  augroup filetype_python
+    autocmd!
+    autocmd BufNewFile,BufRead *.py setlocal filetype=python
+    autocmd FileType python setlocal autoindent
+    autocmd FileType python setlocal expandtab
+    autocmd FileType python setlocal fileformat=unix
+    autocmd FileType python setlocal shiftwidth=4
+    autocmd FileType python setlocal softtabstop=4
+    autocmd FileType python setlocal tabstop=4
+    autocmd FileType python setlocal textwidth=79
+  augroup end
   augroup filetype_sieve
     autocmd!
-    autocmd BufRead,BufNewFile *.sieve set filetype=sieve
+    autocmd BufNewFile,BufRead *.sieve setlocal filetype=sieve
     autocmd FileType sieve setlocal expandtab
     autocmd FileType sieve setlocal shiftwidth=2
     autocmd FileType sieve setlocal softtabstop=2
@@ -299,7 +357,7 @@ if has('autocmd')
   augroup end
   augroup filetype_yaml
     autocmd!
-    autocmd BufRead,BufNewFile *.sls set filetype=yaml
+    autocmd BufNewFile,BufRead *.sls setlocal filetype=yaml
     autocmd FileType yaml setlocal expandtab
     autocmd FileType yaml setlocal shiftwidth=2
     autocmd FileType yaml setlocal softtabstop=2
@@ -307,7 +365,7 @@ if has('autocmd')
   augroup end
 endif
 
-let g:vimrc_loaded = 'yes'
+let g:vimrc_loaded = 1
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
