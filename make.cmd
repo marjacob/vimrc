@@ -33,9 +33,11 @@ call :delete_archive
 %zip% a -ttar -so -an^
 	Makefile^
 	README.md^
+	make.cmd^
 	vimrc^
 	.gitignore^
 	.gitmodules^
+	bin^
 	pack | %zip% a -si "%bundle%"
 exit /b 0
 

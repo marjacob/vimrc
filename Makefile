@@ -18,6 +18,6 @@ init:
 update:
 	@git submodule foreach git pull origin master
 
-$(bundle): Makefile README.md vimrc .gitignore .gitmodules
-	@tar cvfz $(@) $(^) pack
+$(bundle): Makefile README.md make.cmd vimrc .gitignore .gitmodules
+	@tar cvfz $(@) $(^) bin pack
 
