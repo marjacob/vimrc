@@ -1,66 +1,66 @@
-[submodule "bundle/delimitMate"]
+[submodule "pack/submodules/start/delimitMate"]
 	path = pack/submodules/start/delimitMate
 	url = https://github.com/Raimondi/delimitMate.git
-[submodule "bundle/editorconfig-vim"]
+[submodule "pack/submodules/start/editorconfig-vim"]
 	path = pack/submodules/start/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
-[submodule "bundle/vim-colors-solarized"]
+[submodule "pack/submodules/start/vim-colors-solarized"]
 	path = pack/submodules/start/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "bundle/vim-sensible"]
+[submodule "pack/submodules/start/vim-sensible"]
 	path = pack/submodules/start/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
-[submodule "bundle/vim-speeddating"]
+[submodule "pack/submodules/start/vim-speeddating"]
 	path = pack/submodules/start/vim-speeddating
 	url = https://github.com/tpope/vim-speeddating.git
-[submodule "bundle/sieve.vim"]
+[submodule "pack/submodules/start/sieve.vim"]
 	path = pack/submodules/start/sieve.vim
 	url = https://github.com/vim-scripts/sieve.vim
-[submodule "bundle/vim-airline-themes"]
+[submodule "pack/submodules/start/vim-airline-themes"]
 	path = pack/submodules/start/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
-[submodule "bundle/vim-airline"]
+[submodule "pack/submodules/start/vim-airline"]
 	path = pack/submodules/start/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
-[submodule "bundle/vim-surround"]
+[submodule "pack/submodules/start/vim-surround"]
 	path = pack/submodules/start/vim-surround
 	url = https://github.com/tpope/vim-surround
-[submodule "bundle/vim-repeat"]
+[submodule "pack/submodules/start/vim-repeat"]
 	path = pack/submodules/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat
-[submodule "bundle/vim-dispatch"]
+[submodule "pack/submodules/start/vim-dispatch"]
 	path = pack/submodules/start/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git
-[submodule "bundle/vim-commentary"]
+[submodule "pack/submodules/start/vim-commentary"]
 	path = pack/submodules/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary
-[submodule "bundle/async.vim"]
+[submodule "pack/submodules/start/async.vim"]
 	path = pack/submodules/start/async.vim
 	url = https://github.com/prabirshrestha/async.vim.git
-[submodule "bundle/vim-lsp"]
+[submodule "pack/submodules/start/vim-lsp"]
 	path = pack/submodules/start/vim-lsp
 	url = https://github.com/prabirshrestha/vim-lsp.git
-[submodule "bundle/vim-lsp-settings"]
+[submodule "pack/submodules/start/vim-lsp-settings"]
 	path = pack/submodules/start/vim-lsp-settings
 	url = https://github.com/mattn/vim-lsp-settings.git
-[submodule "bundle/asyncomplete.vim"]
+[submodule "pack/submodules/start/asyncomplete.vim"]
 	path = pack/submodules/start/asyncomplete.vim
 	url = https://github.com/prabirshrestha/asyncomplete.vim
-[submodule "bundle/asyncomplete-lsp.vim"]
+[submodule "pack/submodules/start/asyncomplete-lsp.vim"]
 	path = pack/submodules/start/asyncomplete-lsp.vim
 	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim
-[submodule "bundle/rust.vim"]
+[submodule "pack/submodules/start/rust.vim"]
 	path = pack/submodules/start/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
-[submodule "bundle/syntastic"]
+[submodule "pack/submodules/start/syntastic"]
 	path = pack/submodules/start/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
-[submodule "bundle/vim-markdown"]
+[submodule "pack/submodules/start/vim-markdown"]
 	path = pack/submodules/start/vim-markdown
 	url = https://github.com/plasticboy/vim-markdown.git
-[submodule "bundle/vim-flake8"]
+[submodule "pack/submodules/start/vim-flake8"]
 	path = pack/submodules/start/vim-flake8
 	url = https://github.com/nvie/vim-flake8.git
-[submodule "bundle/vim-toml"]
+[submodule "pack/submodules/start/vim-toml"]
 	path = pack/submodules/start/vim-toml
 	url = https://github.com/cespare/vim-toml.git
