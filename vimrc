@@ -1,9 +1,14 @@
 " ~/.vimrc
 
 set nocompatible
-silent! language en_US.UTF-8
 let mapleader = ","
 nnoremap \ ,
+
+" Try locale names from least to most wanted.
+silent! language English_United States
+silent! language en_US
+silent! language English_United States.UTF-8
+silent! language en_US.UTF-8
 
 " ..... Encoding ..............................................................
 
