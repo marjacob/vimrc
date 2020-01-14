@@ -5,7 +5,6 @@ set zip=%~dp0bin\win32\7za.exe
 
 if [%1] == [] (
 	call :create_archive
-	exit /b 0
 )
 
 if /i "%1" == "bundle" (
