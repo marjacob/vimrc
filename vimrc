@@ -1,6 +1,7 @@
 " ~/.vimrc
 
 set nocompatible
+language en_US
 let mapleader = ","
 nnoremap \ ,
 
