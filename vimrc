@@ -346,6 +346,8 @@ if has('autocmd')
   augroup filetype_python
     autocmd!
     autocmd BufNewFile,BufRead *.py setlocal filetype=python
+    autocmd FileType python autocmd BufWritePre <buffer> 0,$!yapf
+    autocmd FileType python nnoremap <buffer> <leader>f :0,$!yapf<Cr><C-o>
     autocmd FileType python setlocal autoindent
     autocmd FileType python setlocal expandtab
     autocmd FileType python setlocal fileformat=unix
