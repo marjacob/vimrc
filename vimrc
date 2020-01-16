@@ -295,6 +295,10 @@ nnoremap <silent> <Leader>et :e! ~/.tmux.conf<CR>
 " Open .vimrc in current buffer.
 nnoremap <silent> <Leader>ev :e! $MYVIMRC<CR>
 
+" Quit mappings.
+nnoremap <silent> <Leader>Q :q!<CR>
+nnoremap <silent> <Leader>q :q<CR>
+
 " ..... Symbols ...............................................................
 
 inoreabbr mdefinedas ≜
