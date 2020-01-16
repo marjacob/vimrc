@@ -238,6 +238,7 @@ nnoremap <silent> <Leader>bD :bd!<CR>
 nnoremap <silent> <Leader>bb :call SetCurrentBuffer()<CR>
 nnoremap <silent> <Leader>bd :bd<CR>
 nnoremap <silent> <Leader>bn :bn<CR>
+nnoremap <silent> <Leader>bn :enew!<CR>
 nnoremap <silent> <Leader>bp :bp<CR>
 
 " ..... Indentation ...........................................................
