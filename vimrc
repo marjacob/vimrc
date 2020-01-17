@@ -304,6 +304,7 @@ nnoremap <silent> <Leader>q :q<CR>
 inoreabbr mdefinedas ≜
 inoreabbr mdelta ∂
 inoreabbr melemin ∈
+inoreabbr mellipsis …
 inoreabbr mequiv ≡
 inoreabbr mexists ∃
 inoreabbr mforall ∀
