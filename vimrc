@@ -266,10 +266,13 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 
-" Support æøå with any keyboard layout.
-inoremap <silent> <Leader>[ å
+" Support æøåÆØÅ with any keyboard layout.
+inoremap <silent> <Leader>" Æ
 inoremap <silent> <Leader>' æ
+inoremap <silent> <Leader>: Ø
 inoremap <silent> <Leader>; ø
+inoremap <silent> <Leader>[ å
+inoremap <silent> <Leader>{ Å
 
 " Exit insert mode.
 inoremap jj <ESC>
