@@ -277,6 +277,9 @@ inoremap <silent> <Leader>{ Å
 " Exit insert mode.
 inoremap jj <ESC>
 
+" Clear search highlighting and any message already displayed.
+nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
+
 " Redo failed paste properly.
 nnoremap <silent> <Leader>a :call RetryPaste()<CR>
 
