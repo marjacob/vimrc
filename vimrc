@@ -351,8 +351,9 @@ if has('autocmd')
   augroup end
   augroup filetype_markdown
     autocmd!
-    autocmd FileType markdown setlocal colorcolumn=""
+    autocmd FileType markdown setlocal colorcolumn=77
     autocmd FileType markdown setlocal linebreak nolist wrap
+    autocmd FileType markdown setlocal textwidth=76
   augroup end
   augroup filetype_python
     autocmd!
