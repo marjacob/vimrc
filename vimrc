@@ -98,19 +98,18 @@ if has('gui_running')
           \Monospace\ 12
   elseif has('win32')
     set guifont =
-          \Consolas:h12:cANSI
+          \Consolas:h13:cANSI
   endif
 
   " Try to use cooler fonts.
   if has('mac') || has('win32')
-    set guifont =
-          \Source\ Code\ Pro\ for\ Powerline:h11,
-          \DejaVu_Sans_Mono_for_Powerline:h11,
-          \Fira_Code:h11
+    silent! set guifont =
+          \Source\ Code\ Pro\ for\ Powerline:h12,
+          \DejaVu\ Sans\ Mono\ for\ Powerline:h12,
   else
-    set guifont =
+    silent! set guifont =
           \Source\ Code\ Pro\ for\ Powerline\ 12,
-          \DejaVu\ Sans\ Mono\ for\ Powerline\ 12
+          \DejaVu\ Sans\ Mono\ for\ Powerline\ 12,
   endif
 
   " Enable some extra features depending on the current font.
