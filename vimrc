@@ -77,11 +77,6 @@ if has('gui_running')
   colorscheme solarized
   set background=light
 
-  if !exists('g:vimrc_loaded')
-    set columns=90
-    set lines=32
-  endif
-
   set guioptions+=a
   set guioptions+=c
   set guioptions-=L
@@ -94,28 +89,47 @@ if has('gui_running')
   set guioptions-=m
   set guioptions-=r
 
+  " Set sane fallback fonts.
   if has('mac')
-    set guifont=Monaco:h12,Inconsolata:h15
+    set guifont =
+          \Monaco:h12,Inconsolata:h15
   elseif has('unix')
-    set guifont=Monospace\ 12
+    set guifont =
+          \Monospace\ 12
   elseif has('win32')
-    set guifont=
-          \Source\ Code\ Pro\ for\ Powerline:h11,
-          \DejaVu\ Sans\ Mono\ for\ Powerline:h11,
-          \Fira\ Code:h11,
+    set guifont =
           \Consolas:h12:cANSI
-    set linespace=0
+  endif
 
-    if &guifont =~? 'DejaVu Sans Mono for Powerline'
-      let g:airline_powerline_fonts = 1
-      set renderoptions=type:directx
-    elseif &guifont =~? 'Source Code Pro for Powerline'
-      let g:airline_powerline_fonts = 1
-      set renderoptions=type:directx
-    elseif &encoding == 'utf-8' && &guifont =~? 'Fira Code'
-      " https://github.com/tonsky/FiraCode/issues/462
-      set renderoptions=type:directx
-    endif
+  " Try to use cooler fonts.
+  if has('mac') || has('win32')
+    set guifont =
+          \Source\ Code\ Pro\ for\ Powerline:h11,
+          \DejaVu_Sans_Mono_for_Powerline:h11,
+          \Fira_Code:h11
+  else
+    set guifont =
+          \Source\ Code\ Pro\ for\ Powerline\ 12,
+          \DejaVu\ Sans\ Mono\ for\ Powerline\ 12
+  endif
+
+  " Enable some extra features depending on the current font.
+  if &guifont =~? 'DejaVu Sans Mono for Powerline'
+    let g:airline_powerline_fonts = 1
+  elseif &guifont =~? 'Source Code Pro for Powerline'
+    let g:airline_powerline_fonts = 1
+  endif
+
+  " Use DirectX rendering on Windows.
+  if has('win32')
+    set renderoptions=type:directx
+    set linespace=0
+  endif
+
+  " Set the default Windows size unless already running.
+  if !exists('g:vimrc_loaded')
+    set columns=90
+    set lines=32
   endif
 endif
 
