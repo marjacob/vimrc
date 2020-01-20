@@ -23,7 +23,7 @@ endif
 
 " vim-airline/vim-airline
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='solarized'
+let g:airline_theme = 'solarized'
 
 " Raimondi/delimitMate
 " Remove <> (<:>).
@@ -99,11 +99,21 @@ if has('gui_running')
   elseif has('unix')
     set guifont=Monospace\ 12
   elseif has('win32')
-    set guifont=Fira\ Code:h11,Consolas:h12:cANSI
+    set guifont=
+          \Source\ Code\ Pro\ for\ Powerline:h11,
+          \DejaVu\ Sans\ Mono\ for\ Powerline:h11,
+          \Fira\ Code:h11,
+          \Consolas:h12:cANSI
     set linespace=0
 
-    " https://github.com/tonsky/FiraCode/issues/462
-    if &encoding == 'utf-8' && &guifont =~? 'Fira Code'
+    if &guifont =~? 'DejaVu Sans Mono for Powerline'
+      let g:airline_powerline_fonts = 1
+      set renderoptions=type:directx
+    elseif &guifont =~? 'Source Code Pro for Powerline'
+      let g:airline_powerline_fonts = 1
+      set renderoptions=type:directx
+    elseif &encoding == 'utf-8' && &guifont =~? 'Fira Code'
+      " https://github.com/tonsky/FiraCode/issues/462
       set renderoptions=type:directx
     endif
   endif
