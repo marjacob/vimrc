@@ -1,29 +1,156 @@
 " ~/.vimrc
+" ............................................................................
 
-set nocompatible
-let mapleader = ","
-nnoremap \ ,
+if has('vim_starting')
+  set nocompatible
+  set pastetoggle=<F2>
 
-" Try locale names from least to most wanted.
-silent! language English_United States
-silent! language en_US
-silent! language English_United States.UTF-8
-silent! language en_US.UTF-8
-
-" ..... Encoding ..............................................................
-
-if has('multi_byte')
-  set encoding=utf-8
-  scriptencoding utf8
-  setlocal fileencoding=utf-8
-  setlocal fileencodings=utf-8,latin1,default
+  " Leader
+  let mapleader = ","
+  nnoremap \ ,
 endif
 
-" ..... Plugins ...............................................................
+" ..... Encoding .............................................................
 
-" vim-airline/vim-airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'solarized'
+set encoding=utf-8     " Encoding displayed.
+set fileencoding=utf-8 " Encoding written to file.
+
+" ..... Appearance ...........................................................
+
+function! s:font()
+  if has('mac')
+    return 'Monaco:h12'
+  elseif has('win32')
+    return 'Consolas:h11,Courier New:h10'
+  else
+    return 'Monospace Medium 12'
+  endif
+endfunction
+
+function! s:startup_cui()
+  if has('title')
+    set noicon
+  endif
+endfunction
+
+function! s:startup_gui()
+  set background=light
+  silent! colorscheme solarized8
+
+  if has('directx')
+    set renderoptions=type:directx
+  endif
+
+  if has('win32')
+    set linespace=0
+  endif
+
+  " Hide superfluous user interface elements.
+  set guioptions+=a
+  set guioptions+=c
+  set guioptions-=L
+  set guioptions-=R
+  set guioptions-=T
+  set guioptions-=b
+  set guioptions-=e
+  set guioptions-=f
+  set guioptions-=l
+  set guioptions-=m
+  set guioptions-=r
+
+  " Set initial window dimensions.
+  set columns=90
+  set lines=32
+
+  " Set window font.
+  let &g:guifont=substitute(&g:guifont, '^$', s:font(), '')
+endfunction
+
+if has('vim_starting')
+  " Try locales in order from least to most preferred.
+  silent! language English_United States
+  silent! language en_US
+  silent! language English_United States.UTF-8
+  silent! language en_US.UTF-8
+
+  " Set fallback color scheme.
+  if get(g:, 'colors_name', 'default') ==# 'default'
+    silent! colorscheme desert
+  endif
+
+  if has('extra_search')
+    set hlsearch
+    set incsearch
+  endif
+
+  if has('syntax')
+    set colorcolumn=+1
+  endif
+
+  set cmdheight=2
+
+  " Display line numbers.
+  set number
+  set numberwidth=5
+
+  " Set default indentation options.
+  set noexpandtab
+  set shiftwidth=8
+  set softtabstop=8
+  set tabstop=8
+  set textwidth=78
+
+  if has('statusline')
+    set laststatus=2
+    set showtabline=2
+
+    if empty(&g:statusline)
+      set statusline=[%n]\ %<%.99f\ %y%h%w%m%r%=%-14.(%l,%c%V%)\ %P
+    endif
+
+    if has('title')
+      set iconstring=
+            \%{empty(v:servername)?v:progname\ :\ v:servername}
+            \%{exists('$SSH_TTY')?'@'.hostname():''}
+      set titlestring=
+            \%{v:progname}
+            \%(\ %)
+            \%{empty(v:servername)?'':'--servername\ '.v:servername.'\ '}
+            \%{fnamemodify(getcwd(),':~')}
+            \%{exists('$SSH_TTY')?'\ <'.hostname().'>':''}
+    endif
+  endif
+
+  if has('autocmd')
+    augroup startup
+      autocmd!
+      autocmd VimEnter * if !has('gui_running') | call s:startup_cui() | endif
+      autocmd GUIEnter * call s:startup_gui()
+    augroup end
+  else
+    if has('gui_running')
+      call s:startup_gui()
+    else
+      call s:startup_cui()
+    endif
+  endif
+endif
+
+" ..... Bell .................................................................
+
+" Disable audible and visual bell.
+if has('gui_running')
+  if has('autocmd')
+    augroup disable_bell
+      autocmd!
+      autocmd GUIEnter * set noerrorbells visualbell t_vb=
+    augroup end
+  endif
+else
+  set noerrorbells visualbell t_vb=
+endif
+
+" ..... Plugins ..............................................................
 
 " Raimondi/delimitMate
 " Remove <> (<:>).
@@ -57,82 +184,7 @@ if executable('rls')
   augroup end
 endif
 
-" ..... Appearance ............................................................
-
-set laststatus=2
-set number
-set numberwidth=5
-
-if has('extra_search')
-  set hlsearch
-endif
-
-if has('syntax')
-  set colorcolumn=+1,99
-endif
-
-silent! colorscheme desert
-
-if has('gui_running')
-  colorscheme solarized
-  set background=light
-
-  set guioptions+=a
-  set guioptions+=c
-  set guioptions-=L
-  set guioptions-=R
-  set guioptions-=T
-  set guioptions-=b
-  set guioptions-=e
-  set guioptions-=f
-  set guioptions-=l
-  set guioptions-=m
-  set guioptions-=r
-
-  " Set sane fallback fonts.
-  if has('mac')
-    set guifont =
-          \Monaco:h12,Inconsolata:h15
-  elseif has('unix')
-    set guifont =
-          \Monospace\ 12
-  elseif has('win32')
-    set guifont =
-          \Consolas:h13:cANSI
-  endif
-
-  " Try to use cooler fonts.
-  if has('mac') || has('win32')
-    silent! set guifont =
-          \Source\ Code\ Pro\ for\ Powerline:h12,
-          \DejaVu\ Sans\ Mono\ for\ Powerline:h12,
-  else
-    silent! set guifont =
-          \Source\ Code\ Pro\ for\ Powerline\ 12,
-          \DejaVu\ Sans\ Mono\ for\ Powerline\ 12,
-  endif
-
-  " Enable some extra features depending on the current font.
-  if &guifont =~? 'DejaVu Sans Mono for Powerline'
-    let g:airline_powerline_fonts = 1
-  elseif &guifont =~? 'Source Code Pro for Powerline'
-    let g:airline_powerline_fonts = 1
-  endif
-
-  " Use DirectX rendering on Windows.
-  if has('win32')
-    set renderoptions=type:directx
-    set linespace=0
-  endif
-
-  " Set the default Windows size unless already running.
-  if !exists('g:vimrc_loaded')
-    set columns=90
-    set lines=32
-  endif
-endif
-
-" ..... General ...............................................................
+" ..... General ..............................................................
 
 set clipboard+=unnamed
 set fileformat=unix
@@ -147,6 +199,7 @@ set noshowmode
 set noswapfile
 set nowrap
 set report=0
+set scrolloff=5
 set shortmess+=I
 set splitright
 set ttyfast
@@ -181,24 +234,10 @@ if has('virtualedit')
   set virtualedit=block
 endif
 
-" ..... Bell ..................................................................
-
-" Disable audible and visual bell.
-if has('gui_running')
-  if has('autocmd')
-    augroup disable_bell
-      autocmd!
-      autocmd GUIEnter * set noerrorbells visualbell t_vb=
-    augroup end
-  endif
-else
-  set noerrorbells visualbell t_vb=
-endif
-
-" ..... Buffers ...............................................................
+" ..... Buffers ..............................................................
 
 " Redo failed paste properly.
-function! RetryPaste()
+function! s:retry_paste()
   " Undo last change.
   execute 'normal u'
   " Enable paste mode.
@@ -208,22 +247,18 @@ function! RetryPaste()
   execute 'normal .'
   " Disable paste mode unless previously enabled.
   if paste == 0
-      set nopaste
+    set nopaste
   endif
   " Move cursor to last position in insert mode.
   execute 'normal gi'
 endfunction
 
-function! RefreshUI()
-  if exists(':AirlineRefresh')
-    AirlineRefresh
-  else
-    redraw!
-    redrawstatus!
-  endif
+function! s:refresh_ui()
+  redraw!
+  redrawstatus!
 endfunction
 
-function! SetCurrentBuffer()
+function! s:set_current_buffer()
   " Show buffer list.
   let l:more = &more
   set nomore
@@ -237,8 +272,7 @@ function! SetCurrentBuffer()
   try
     let l:buffer = input("\nBuffer: ")
   catch /^Vim:Interrupt$/
-    " Success: User issued CTRL-C.
-    return 1
+    return 1 " User issued CTRL-C.
   finally
     call inputrestore()
   endtry
@@ -247,35 +281,38 @@ function! SetCurrentBuffer()
   try
     execute 'buffer' l:buffer
   catch /^Vim\%((\a\+)\)\=:E86/
-    " Failure: Buffer does not exist.
-    return 0
+    return 0 " Buffer does not exist.
   catch /^Vim\%((\a\+)\)\=:E93/
-    " Failure: More than one match.
-    return 0
+    return 0 " More than one match.
   endtry
 
   return 1
 endfunction
 
+" ..... Mappings .............................................................
+
+inoremap jj <ESC>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <silent> <Leader>Q :q!<CR>
+nnoremap <silent> <Leader>a :call <SID>retry_paste()<CR>
 nnoremap <silent> <Leader>bD :bd!<CR>
-nnoremap <silent> <Leader>bb :call SetCurrentBuffer()<CR>
+nnoremap <silent> <Leader>bb :call <SID>set_current_buffer()<CR>
 nnoremap <silent> <Leader>bd :bd<CR>
 nnoremap <silent> <Leader>be :enew!<CR>
 nnoremap <silent> <Leader>bn :bn<CR>
 nnoremap <silent> <Leader>bp :bp<CR>
-
-" ..... Indentation ...........................................................
-
-" Set default indentation options unless sourced.
-if !exists('g:vimrc_loaded')
-  set noexpandtab
-  set shiftwidth=8
-  set softtabstop=8
-  set tabstop=8
-  set textwidth=79
-endif
-
-" ..... Mappings ..............................................................
+nnoremap <silent> <Leader>eb :e! ~/.bashrc<CR>
+nnoremap <silent> <Leader>eg :e! ~/.gitconfig<CR>
+nnoremap <silent> <Leader>ep :e! ~/.profile<CR>
+nnoremap <silent> <Leader>es :e! ~/.ssh/config<CR>
+nnoremap <silent> <Leader>et :e! ~/.tmux.conf<CR>
+nnoremap <silent> <Leader>ev :e! $MYVIMRC<CR>
+nnoremap <silent> <Leader>q :q<CR>
+nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
+vnoremap <silent> <Leader>s :sort<CR>
 
 " prabirshrestha/asyncomplete.vim
 imap <C-space> <Plug>(asyncomplete_force_refresh)
@@ -283,141 +320,149 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 
-" Split navigation mappings.
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
+" ..... Symbols ..............................................................
 
-" Support æøåÆØÅ with any keyboard layout.
-inoremap <silent> <Leader>" Æ
-inoremap <silent> <Leader>' æ
-inoremap <silent> <Leader>: Ø
-inoremap <silent> <Leader>; ø
-inoremap <silent> <Leader>[ å
-inoremap <silent> <Leader>{ Å
+let s:symbols = {
+      \'mdefinedas'  : '≜',
+      \'mdelta'      : '∂',
+      \'melemin'     : '∈',
+      \'mellipsis'   : '…',
+      \'mequiv'      : '≡',
+      \'mexists'     : '∃',
+      \'mforall'     : '∀',
+      \'mgrequal'    : '≥',
+      \'miff'        : '⇔',
+      \'mifthen'     : '→',
+      \'mimplies'    : '⇒',
+      \'minfinite'   : '∞',
+      \'mintersect'  : '∩',
+      \'mlequal'     : '≤',
+      \'mlogand'     : '∨',
+      \'mlognot'     : '¬',
+      \'mlogor'      : '∧',
+      \'mnequal'     : '≠',
+      \'mnotelemnin' : '∉',
+      \'mprod'       : '∏',
+      \'mshrug'      : '¯\_(ツ)_/¯',
+      \'msqrt'       : '√',
+      \'msum'        : '∑',
+      \'mtherefore'  : '∴',
+      \'mthrow'      : '(╯°□°）╯︵ ┻━┻',
+      \'munion'      : '∪',
+      \'mxor'        : '⊕',
+      \'samfisher'   : '∴',
+      \}
 
-" Exit insert mode.
-inoremap jj <ESC>
+for [lhs, rhs] in items(s:symbols)
+  execute 'inoreabbrev' lhs rhs
+endfor
 
-" Clear search highlighting and any message already displayed.
-nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
+" ..... Filetypes ............................................................
 
-" Redo failed paste properly.
-nnoremap <silent> <Leader>a :call RetryPaste()<CR>
+function! s:filetype_c()
+  setlocal shiftwidth=8
+  setlocal tabstop=8
+endfunction
 
-" Open .bashrc in current buffer.
-nnoremap <silent> <Leader>eb :e! ~/.bashrc<CR>
+function! s:filetype_cpp()
+  setlocal shiftwidth=8
+  setlocal tabstop=8
+endfunction
 
-" Open .gitconfig in current buffer.
-nnoremap <silent> <Leader>eg :e! ~/.gitconfig<CR>
+function! s:filetype_help()
+  setlocal keywordprg=:help
+endfunction
 
-" Open .profile in current buffer.
-nnoremap <silent> <Leader>ep :e! ~/.profile<CR>
+function! s:filetype_markdown()
+  setlocal colorcolumn=77
+  setlocal linebreak nolist wrap
+  setlocal textwidth=76
 
-" Open .ssh/config in current buffer.
-nnoremap <silent> <Leader>es :e! ~/.ssh/config<CR>
+  " Support [æøåÆØÅ] with any keyboard layout.
+  inoremap <buffer> <silent> <Leader>" Æ
+  inoremap <buffer> <silent> <Leader>' æ
+  inoremap <buffer> <silent> <Leader>: Ø
+  inoremap <buffer> <silent> <Leader>; ø
+  inoremap <buffer> <silent> <Leader>[ å
+  inoremap <buffer> <silent> <Leader>{ Å
 
-" Open .tmux.conf in current buffer.
-nnoremap <silent> <Leader>et :e! ~/.tmux.conf<CR>
+  nnoremap <Leader>1 m`yypVr=``
+  nnoremap <Leader>2 m`yypVr-``
+  nnoremap <Leader>3 m`^i### <esc>``4l
+  nnoremap <Leader>4 m`^i#### <esc>``5l
+  nnoremap <Leader>5 m`^i##### <esc>``6l
+endfunction
 
-" Open .vimrc in current buffer.
-nnoremap <silent> <Leader>ev :e! $MYVIMRC<CR>
+function! s:filetype_python()
+  setlocal autoindent
+  setlocal expandtab
+  setlocal fileformat=unix
+  setlocal shiftwidth=4
+  setlocal softtabstop=4
+  setlocal tabstop=4
+  setlocal textwidth=79
 
-" Quit mappings.
-nnoremap <silent> <Leader>Q :q!<CR>
-nnoremap <silent> <Leader>q :q<CR>
+  nnoremap <buffer> <leader>f :0,$!yapf<Cr><C-o>
 
-" ..... Symbols ...............................................................
-
-inoreabbr mdefinedas ≜
-inoreabbr mdelta ∂
-inoreabbr melemin ∈
-inoreabbr mellipsis …
-inoreabbr mequiv ≡
-inoreabbr mexists ∃
-inoreabbr mforall ∀
-inoreabbr mgrequal ≥
-inoreabbr miff ⇔
-inoreabbr mifthen →
-inoreabbr mimplies ⇒
-inoreabbr minfinite ∞
-inoreabbr mintersect ∩
-inoreabbr mlequal ≤
-inoreabbr mlogand ∨
-inoreabbr mlognot ¬
-inoreabbr mlogor ∧
-inoreabbr mnequal ≠
-inoreabbr mnotelemnin ∉
-inoreabbr mprod ∏
-inoreabbr mshrug ¯\_(ツ)_/¯
-inoreabbr msqrt √
-inoreabbr msum ∑
-inoreabbr mtherefore ∴
-inoreabbr mthrow (╯°□°）╯︵ ┻━┻
-inoreabbr munion ∪
-inoreabbr mxor ⊕
-inoreabbr samfisher ∴
-
-" ..... Filetypes .............................................................
-
-if has('autocmd')
-  augroup filetype_c
-    autocmd!
-    autocmd BufNewFile,BufRead *.h setlocal filetype=c
-    autocmd FileType c setlocal shiftwidth=8
-    autocmd FileType c setlocal tabstop=8
-  augroup end
-  augroup filetype_help
-    autocmd!
-    autocmd FileType help setlocal keywordprg=:help
-  augroup end
-  augroup filetype_markdown
-    autocmd!
-    autocmd FileType markdown setlocal colorcolumn=77
-    autocmd FileType markdown setlocal linebreak nolist wrap
-    autocmd FileType markdown setlocal textwidth=76
-  augroup end
   augroup filetype_python
     autocmd!
-    autocmd BufNewFile,BufRead *.py setlocal filetype=python
-    autocmd FileType python autocmd BufWritePre <buffer> 0,$!yapf
-    autocmd FileType python nnoremap <buffer> <leader>f :0,$!yapf<Cr><C-o>
-    autocmd FileType python setlocal autoindent
-    autocmd FileType python setlocal expandtab
-    autocmd FileType python setlocal fileformat=unix
-    autocmd FileType python setlocal shiftwidth=4
-    autocmd FileType python setlocal softtabstop=4
-    autocmd FileType python setlocal tabstop=4
-    autocmd FileType python setlocal textwidth=79
+    autocmd BufWritePre <buffer> 0,$!yapf
   augroup end
-  augroup filetype_sieve
-    autocmd!
-    autocmd BufNewFile,BufRead *.sieve setlocal filetype=sieve
-    autocmd FileType sieve setlocal expandtab
-    autocmd FileType sieve setlocal shiftwidth=2
-    autocmd FileType sieve setlocal softtabstop=2
-    autocmd FileType sieve setlocal tabstop=2
-  augroup end
-  augroup filetype_vimrc
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source % | :call RefreshUI()
-    autocmd FileType vim setlocal keywordprg=:help
-  augroup end
-  augroup filetype_yaml
-    autocmd!
-    autocmd BufNewFile,BufRead *.sls setlocal filetype=yaml
-    autocmd FileType yaml setlocal expandtab
-    autocmd FileType yaml setlocal shiftwidth=2
-    autocmd FileType yaml setlocal softtabstop=2
-    autocmd FileType yaml setlocal tabstop=2
+endfunction
+
+function! s:filetype_sieve()
+  setlocal expandtab
+  setlocal shiftwidth=2
+  setlocal softtabstop=2
+  setlocal tabstop=2
+endfunction
+
+function! s:filetype_vim()
+  setlocal keywordprg=:help
+  if has('win32')
+    setlocal makeprg=%:h\make.cmd
+  else
+    setlocal makeprg=make -C %:h
+  endif
+endfunction
+
+function! s:filetype_yaml()
+  setlocal expandtab
+  setlocal shiftwidth=2
+  setlocal softtabstop=2
+  setlocal tabstop=2
+endfunction
+
+if has('autocmd')
+  augroup filetypes
+    au!
+    " C
+    au BufNewFile,BufRead *.{c,h} setl ft=c
+    au FileType c call <SID>filetype_c()
+    " C++
+    au BufNewFile,BufRead *.{c++,cc,cpp,cxx,h++,hh,hxx,hpp} setl ft=cpp
+    au FileType cpp call <SID>filetype_cpp()
+    " Help
+    au FileType help call <SID>filetype_help()
+    " Markdown
+    au FileType markdown call <SID>filetype_markdown()
+    " Python
+    au FileType python call <SID>filetype_python()
+    " Sieve
+    au BufNewFile,BufRead *.sieve setl ft=sieve
+    au FileType sieve call <SID>filetype_sieve()
+    " Vim
+    au BufWritePost $MYVIMRC so % | call <SID>refresh_ui()
+    au FileType vim call <SID>filetype_vim()
+    " YAML
+    au BufNewFile,BufRead *.sls setl ft=yaml
+    au FileType yaml call <SID>filetype_yaml()
   augroup end
 endif
+
+" ............................................................................
 
 let g:vimrc_loaded = 1
 
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
-
+" ............................................................................
 " vim:et:fen:fdm=marker:fmr={{,}}:fcl=all:fdl=0::ts=2:sw=2:sts=2:

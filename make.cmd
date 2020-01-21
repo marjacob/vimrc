@@ -1,7 +1,8 @@
 @echo off
+pushd "%~dp0"
 
 set bundle=bundle.tgz
-set zip=%~dp0bin\win32\7za.exe
+set packer=bin\win32\7za.exe
 
 if [%1] == [] (
 	call :create_archive
@@ -23,13 +24,14 @@ if /i "%1" == "update" (
 	git submodule foreach git pull origin master
 )
 
+popd
 exit /b 0
 
 :create_archive
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 call :delete_archive
 
-%zip% a -ttar -so -an^
+"%packer%" a -ttar -so -an^
 	Makefile^
 	README.md^
 	make.cmd^
@@ -37,7 +39,7 @@ call :delete_archive
 	.gitignore^
 	.gitmodules^
 	bin^
-	pack | %zip% a -si "%bundle%"
+	pack | "%packer%" a -si "%bundle%"
 exit /b 0
 
 :delete_archive

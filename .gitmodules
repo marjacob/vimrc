@@ -4,9 +4,6 @@
 [submodule "pack/submodules/start/editorconfig-vim"]
 	path = pack/submodules/start/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
-[submodule "pack/submodules/start/vim-colors-solarized"]
-	path = pack/submodules/start/vim-colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "pack/submodules/start/vim-sensible"]
 	path = pack/submodules/start/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
@@ -16,12 +13,6 @@
 [submodule "pack/submodules/start/sieve.vim"]
 	path = pack/submodules/start/sieve.vim
 	url = https://github.com/vim-scripts/sieve.vim
-[submodule "pack/submodules/start/vim-airline-themes"]
-	path = pack/submodules/start/vim-airline-themes
-	url = https://github.com/vim-airline/vim-airline-themes.git
-[submodule "pack/submodules/start/vim-airline"]
-	path = pack/submodules/start/vim-airline
-	url = https://github.com/vim-airline/vim-airline.git
 [submodule "pack/submodules/start/vim-surround"]
 	path = pack/submodules/start/vim-surround
 	url = https://github.com/tpope/vim-surround
@@ -64,3 +55,6 @@
 [submodule "pack/submodules/start/vim-toml"]
 	path = pack/submodules/start/vim-toml
 	url = https://github.com/cespare/vim-toml.git
+[submodule "pack/submodules/opt/vim-solarized8"]
+	path = pack/submodules/opt/vim-solarized8
+	url = https://github.com/lifepillar/vim-solarized8.git
