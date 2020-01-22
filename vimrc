@@ -91,7 +91,8 @@ if has('vim_starting')
   set wildmode=list:longest,full
 
   " Don't make mapped keys time out.
-  set notimeout ttimeout
+  set notimeout
+  set ttimeout
 
   if has('autochdir')
     set noautochdir
