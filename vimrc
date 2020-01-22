@@ -168,7 +168,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <silent> <Leader>Q :q!<CR>
-nnoremap <silent> <Leader>a :call buffer#redo_paste()<CR>
 nnoremap <silent> <Leader>bD :bd!<CR>
 nnoremap <silent> <Leader>bb :call buffer#set_current()<CR>
 nnoremap <silent> <Leader>bd :bd<CR>
@@ -181,6 +180,7 @@ nnoremap <silent> <Leader>ep :e! ~/.profile<CR>
 nnoremap <silent> <Leader>es :e! ~/.ssh/config<CR>
 nnoremap <silent> <Leader>et :e! ~/.tmux.conf<CR>
 nnoremap <silent> <Leader>ev :e! $MYVIMRC<CR>
+nnoremap <silent> <Leader>p :call buffer#redo_paste()<CR>
 nnoremap <silent> <Leader>q :q<CR>
 nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
 vnoremap <silent> <Leader>s :sort<CR>
