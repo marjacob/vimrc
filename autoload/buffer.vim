@@ -53,8 +53,3 @@ function! buffer#redo_paste()
   execute 'normal gi'
 endfunction
 
-function! buffer#refresh()
-  redraw!
-  redrawstatus!
-endfunction
-
