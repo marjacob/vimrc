@@ -17,16 +17,6 @@ set fileencoding=utf-8 " Encoding written to file.
 
 " ..... Appearance ...........................................................
 
-function! s:font()
-  if has('mac')
-    return 'Monaco:h12'
-  elseif has('win32')
-    return 'Consolas:h11,Courier New:h10'
-  else
-    return 'Monospace Medium 12'
-  endif
-endfunction
-
 function! s:startup_cui()
   if has('title')
     set noicon
@@ -62,8 +52,7 @@ function! s:startup_gui()
   set columns=90
   set lines=32
 
-  " Set window font.
-  let &g:guifont=substitute(&g:guifont, '^$', s:font(), '')
+  call font#configure()
 endfunction
 
 if has('vim_starting')
@@ -86,8 +75,6 @@ if has('vim_starting')
   if has('syntax')
     set colorcolumn=+1
   endif
-
-  set cmdheight=2
 
   " Display line numbers.
   set number
@@ -234,61 +221,6 @@ if has('virtualedit')
   set virtualedit=block
 endif
 
-" ..... Buffers ..............................................................
-
-" Redo failed paste properly.
-function! s:retry_paste()
-  " Undo last change.
-  execute 'normal u'
-  " Enable paste mode.
-  let l:paste = &paste
-  set paste
-  " Repeat last change.
-  execute 'normal .'
-  " Disable paste mode unless previously enabled.
-  if paste == 0
-    set nopaste
-  endif
-  " Move cursor to last position in insert mode.
-  execute 'normal gi'
-endfunction
-
-function! s:refresh_ui()
-  redraw!
-  redrawstatus!
-endfunction
-
-function! s:set_current_buffer()
-  " Show buffer list.
-  let l:more = &more
-  set nomore
-  echo
-  ls
-  let &more = l:more
-
-  call inputsave()
-
-  " Try asking the user for a buffer number or name.
-  try
-    let l:buffer = input("\nBuffer: ")
-  catch /^Vim:Interrupt$/
-    return 1 " User issued CTRL-C.
-  finally
-    call inputrestore()
-  endtry
-
-  " Try switching to the specified buffer.
-  try
-    execute 'buffer' l:buffer
-  catch /^Vim\%((\a\+)\)\=:E86/
-    return 0 " Buffer does not exist.
-  catch /^Vim\%((\a\+)\)\=:E93/
-    return 0 " More than one match.
-  endtry
-
-  return 1
-endfunction
-
 " ..... Mappings .............................................................
 
 inoremap jj <ESC>
@@ -297,9 +229,9 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <silent> <Leader>Q :q!<CR>
-nnoremap <silent> <Leader>a :call <SID>retry_paste()<CR>
+nnoremap <silent> <Leader>a :call buffer#redo_paste()<CR>
 nnoremap <silent> <Leader>bD :bd!<CR>
-nnoremap <silent> <Leader>bb :call <SID>set_current_buffer()<CR>
+nnoremap <silent> <Leader>bb :call buffer#set_current()<CR>
 nnoremap <silent> <Leader>bd :bd<CR>
 nnoremap <silent> <Leader>be :enew!<CR>
 nnoremap <silent> <Leader>bn :bn<CR>
@@ -418,7 +350,11 @@ function! s:filetype_sieve()
 endfunction
 
 function! s:filetype_vim()
+  setlocal expandtab
   setlocal keywordprg=:help
+  setlocal shiftwidth=2
+  setlocal softtabstop=2
+  setlocal tabstop=2
   if has('win32')
     setlocal makeprg=%:h\make.cmd
   else
@@ -452,7 +388,8 @@ if has('autocmd')
     au BufNewFile,BufRead *.sieve setl ft=sieve
     au FileType sieve call <SID>filetype_sieve()
     " Vim
-    au BufWritePost $MYVIMRC so % | call <SID>refresh_ui()
+    au BufNewFile,BufRead *.vim setl ft=vim
+    au BufWritePost $MYVIMRC so % | call buffer#refresh()
     au FileType vim call <SID>filetype_vim()
     " YAML
     au BufNewFile,BufRead *.sls setl ft=yaml
