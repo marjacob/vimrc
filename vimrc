@@ -57,8 +57,6 @@ if has('vim_starting')
     silent! colorscheme desert
   endif
 
-  set pastetoggle=<F2>
-
   " encoding
   set encoding=utf-8
   set fileencoding=utf-8
@@ -161,6 +159,8 @@ if has('vim_starting')
 endif
 
 " ..... mappings .............................................................
+
+set pastetoggle=<F2>
 
 inoremap jj <ESC>
 nnoremap <C-H> <C-W><C-H>
