@@ -19,14 +19,11 @@ function! s:startup_gui()
   set background=light
   silent! colorscheme solarized8
 
-  if has('directx')
-    set renderoptions=type:directx
-  endif
+  " dimensions
+  set columns=90
+  set lines=32
 
-  if has('win32')
-    set linespace=0
-  endif
-
+  " window
   set guioptions+=a
   set guioptions+=c
   set guioptions-=L
@@ -39,8 +36,12 @@ function! s:startup_gui()
   set guioptions-=m
   set guioptions-=r
 
-  set columns=90
-  set lines=32
+  if has('win32')
+    set linespace=0
+    if has('directx')
+      set renderoptions=type:directx
+    endif
+  endif
 endfunction
 
 " ..... startup ..............................................................
