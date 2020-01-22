@@ -23,6 +23,14 @@ function! s:startup_gui()
   set columns=90
   set lines=32
 
+  " rendering
+  if has('win32')
+    set linespace=0
+    if has('directx')
+      set renderoptions=type:directx
+    endif
+  endif
+
   " window
   set guioptions+=a
   set guioptions+=c
@@ -35,13 +43,6 @@ function! s:startup_gui()
   set guioptions-=l
   set guioptions-=m
   set guioptions-=r
-
-  if has('win32')
-    set linespace=0
-    if has('directx')
-      set renderoptions=type:directx
-    endif
-  endif
 endfunction
 
 " ..... startup ..............................................................
