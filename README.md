@@ -1,6 +1,8 @@
-# vimrc
+vimrc
+=====
 
-## Installation
+Installation
+------------
 
 ### Linux
 
@@ -19,16 +21,16 @@ cd vimfiles
 git submodule update --init --recursive
 ```
 
-## Plugins
+Plugins
+-------
 
-```
-cd ~/.vim
-```
+Move to the Vim home directory with `cd %userprofile%\vimfiles` on Windows, or `cd ~/.vim` on other operating systems.
 
 ### Add
 
 ```
-git submodule add https://github.com/tpope/vim-sensible.git bundle/vim-sensible
+cd pack/submodules/start
+git submodule add https://github.com/tpope/vim-sensible.git
 ```
 
 ### Update
@@ -36,9 +38,9 @@ git submodule add https://github.com/tpope/vim-sensible.git bundle/vim-sensible
 #### Remove a plugin
 
 ```
-git submodule deinit bundle/vim-sensible
-git rm -r bundle/vim-sensible
-rm -r .git/modules/bundle/vim-sensible
+git submodule deinit pack/submodules/start/vim-sensible
+git rm -r pack/submodules/start/vim-sensible
+rm -r .git/modules/pack/submodules/start/vim-sensible
 ```
 
 #### Update all plugins
@@ -50,7 +52,7 @@ git submodule foreach git pull origin master
 #### Update one plugin
 
 ```
-cd bundle/vim-sensible
+cd pack/submodules/start/vim-sensible
 git pull origin master
 ```
 
