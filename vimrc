@@ -49,11 +49,7 @@ endfunction
 
 if has('vim_starting')
   call bell#disable()
-
-  silent! language English_United States
-  silent! language en_US
-  silent! language English_United States.UTF-8
-  silent! language en_US.UTF-8
+  call language#english()
 
   if get(g:, 'colors_name', 'default') ==# 'default'
     silent! colorscheme desert
