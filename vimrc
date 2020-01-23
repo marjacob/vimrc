@@ -182,7 +182,7 @@ nnoremap <silent> <Leader>ev :e! $MYVIMRC<CR>
 nnoremap <silent> <Leader>p :call buffer#redo_paste()<CR>
 nnoremap <silent> <Leader>q :q<CR>
 nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
-vnoremap <silent> <Leader>s :sort<CR>
+vnoremap <silent> <F9> :sort<CR>
 
 " ..... symbols ..............................................................
 
