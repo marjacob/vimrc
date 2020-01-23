@@ -183,6 +183,7 @@ nnoremap <silent> <Leader>p :call buffer#redo_paste()<CR>
 nnoremap <silent> <Leader>q :q<CR>
 nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
 vnoremap <silent> <F9> :sort<CR>
+vnoremap <silent> <S-F9> :sort!<CR>
 
 " ..... symbols ..............................................................
 
