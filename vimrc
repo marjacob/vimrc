@@ -85,6 +85,8 @@ if has('vim_starting')
   set report=0
   set scrolloff=5
   set shortmess+=I
+  set splitbelow
+  set splitright
   set ttyfast
   set wildmode=list:longest,full
 
@@ -140,10 +142,6 @@ if has('vim_starting')
 
   if has('syntax')
     set colorcolumn=+1
-  endif
-
-  if has('vertsplit')
-    set splitright
   endif
 
   if has('virtualedit')
