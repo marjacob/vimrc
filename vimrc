@@ -90,7 +90,7 @@ if has('vim_starting')
   set ttyfast
   set wildmode=list:longest,full
 
-  " Don't make mapped keys time out.
+  " no timeout for mapped keys
   set notimeout
   set ttimeout
 
