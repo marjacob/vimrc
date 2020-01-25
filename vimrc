@@ -233,30 +233,3 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 
-if executable('pyls')
-  " pip install python-language-server
-  augroup lsp_python
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'pyls',
-          \ 'cmd': {server_info->['pyls']},
-          \ 'whitelist': ['python'],
-          \ })
-  augroup end
-endif
-
-if executable('rls')
-  " rustup update
-  " rustup component add rls rust-analysis rust-src
-  augroup lsp_rust
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'rls',
-          \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
-          \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
-          \ 'whitelist': ['rust'],
-          \ })
-  augroup end
-endif
-
-" ............................................................................
