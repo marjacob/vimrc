@@ -6,13 +6,15 @@ if has('vim_starting')
   nnoremap \ ,
 endif
 
-" ..... main .................................................................
+" ..... cui ..................................................................
 
 function! s:startup_cui()
   if has('title')
     set noicon
   endif
 endfunction
+
+" ..... gui ..................................................................
 
 function! s:startup_gui()
   call font#configure()
