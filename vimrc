@@ -162,10 +162,6 @@ endif
 set pastetoggle=<F2>
 
 inoremap jj <ESC>
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
 nnoremap <silent> <Leader>Q :q!<CR>
 nnoremap <silent> <Leader>bD :bd!<CR>
 nnoremap <silent> <Leader>bb :call buffer#set_current()<CR>
@@ -173,17 +169,25 @@ nnoremap <silent> <Leader>bd :bd<CR>
 nnoremap <silent> <Leader>be :enew!<CR>
 nnoremap <silent> <Leader>bn :bn<CR>
 nnoremap <silent> <Leader>bp :bp<CR>
+nnoremap <silent> <Leader>p :call buffer#redo_paste()<CR>
+nnoremap <silent> <Leader>q :q<CR>
+nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
+vnoremap <silent> <F9> :sort<CR>
+vnoremap <silent> <S-F9> :sort!<CR>
+
+" files
 nnoremap <silent> <Leader>eb :e! ~/.bashrc<CR>
 nnoremap <silent> <Leader>eg :e! ~/.gitconfig<CR>
 nnoremap <silent> <Leader>ep :e! ~/.profile<CR>
 nnoremap <silent> <Leader>es :e! ~/.ssh/config<CR>
 nnoremap <silent> <Leader>et :e! ~/.tmux.conf<CR>
 nnoremap <silent> <Leader>ev :e! $MYVIMRC<CR>
-nnoremap <silent> <Leader>p :call buffer#redo_paste()<CR>
-nnoremap <silent> <Leader>q :q<CR>
-nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
-vnoremap <silent> <F9> :sort<CR>
-vnoremap <silent> <S-F9> :sort!<CR>
+
+" splits
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
 
 " ..... symbols ..............................................................
 
