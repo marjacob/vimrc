@@ -171,7 +171,6 @@ nnoremap <silent> <Leader>bn :bn<CR>
 nnoremap <silent> <Leader>bp :bp<CR>
 nnoremap <silent> <Leader>p :call buffer#redo_paste()<CR>
 nnoremap <silent> <Leader>q :q<CR>
-nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
 vnoremap <silent> <F9> :sort<CR>
 vnoremap <silent> <S-F9> :sort!<CR>
 
@@ -240,4 +239,15 @@ imap <C-space> <Plug>(asyncomplete_force_refresh)
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+
+" ..... autocommands .........................................................
+
+augroup vimrc
+  autocmd!
+  " incsearch
+  if exists('##CmdlineEnter') && exists('##CmdlineLeave')
+    autocmd CmdlineEnter * set hlsearch
+    autocmd CmdlineLeave * set nohlsearch
+  endif
+augroup end
 
