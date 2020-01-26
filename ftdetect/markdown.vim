@@ -1,5 +1,14 @@
+function s:format()
+  let b:view = winsaveview()
+  execute 'normal! gggqG'
+  call winrestview(b:view)
+  unlet b:view
+endfunction
+
 function! s:setup()
+  setlocal autoindent
   setlocal colorcolumn=77
+  setlocal formatoptions=antw
   setlocal linebreak nolist wrap
   setlocal textwidth=76
 
@@ -18,5 +27,6 @@ function! s:setup()
   nnoremap <Leader>5 m`^i##### <esc>``6l
 endfunction
 
+autocmd BufWritePre *.md call s:format()
 autocmd FileType markdown call s:setup()
 
