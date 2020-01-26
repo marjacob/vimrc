@@ -7,7 +7,6 @@ endfunction
 
 function! s:setup()
   setlocal autoindent
-  setlocal colorcolumn=77
   setlocal formatoptions=antw
   setlocal linebreak nolist wrap
   setlocal textwidth=76
