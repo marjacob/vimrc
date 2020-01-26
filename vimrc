@@ -192,6 +192,7 @@ nnoremap <C-L> <C-W><C-L>
 " ..... symbols ..............................................................
 
 let s:symbols = {
+      \'mapprox'     : '≈',
       \'mdefinedas'  : '≜',
       \'mdelta'      : '∂',
       \'melemin'     : '∈',
@@ -217,6 +218,7 @@ let s:symbols = {
       \'msum'        : '∑',
       \'mtherefore'  : '∴',
       \'mthrow'      : '(╯°□°）╯︵ ┻━┻',
+      \'mtimes'      : '×',
       \'munion'      : '∪',
       \'mxor'        : '⊕',
       \'samfisher'   : '∴',
