@@ -171,6 +171,7 @@ nnoremap <silent> <Leader>bn :bn<CR>
 nnoremap <silent> <Leader>bp :bp<CR>
 nnoremap <silent> <Leader>p :call buffer#redo_paste()<CR>
 nnoremap <silent> <Leader>q :q<CR>
+vnoremap <silent> <F10> :s/\s\+/\r/g<CR>
 vnoremap <silent> <F9> :sort<CR>
 vnoremap <silent> <S-F9> :sort!<CR>
 
