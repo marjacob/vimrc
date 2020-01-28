@@ -38,7 +38,9 @@ call :delete_archive
 	vimrc^
 	.gitignore^
 	.gitmodules^
+	autoload^
 	bin^
+	ftdetect^
 	pack | "%packer%" a -si "%bundle%"
 exit /b 0
 
