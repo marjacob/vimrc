@@ -1,5 +1,26 @@
 " ..... buffer.vim ...........................................................
 
+" Redo failed paste properly.
+function! buffer#redo_paste()
+  " Undo last change.
+  execute 'normal u'
+
+  " Enable paste mode.
+  let l:paste = &paste
+  set paste
+
+  " Repeat last change.
+  execute 'normal .'
+
+  " Disable paste mode unless previously enabled.
+  if paste == 0
+    set nopaste
+  endif
+
+  " Move cursor to last position in insert mode.
+  execute 'normal gi'
+endfunction
+
 " Set current buffer interactively.
 function! buffer#set_current()
   " Show buffer list.
@@ -30,26 +51,5 @@ function! buffer#set_current()
   endtry
 
   return 1
-endfunction
-
-" Redo failed paste properly.
-function! buffer#redo_paste()
-  " Undo last change.
-  execute 'normal u'
-
-  " Enable paste mode.
-  let l:paste = &paste
-  set paste
-
-  " Repeat last change.
-  execute 'normal .'
-
-  " Disable paste mode unless previously enabled.
-  if paste == 0
-    set nopaste
-  endif
-
-  " Move cursor to last position in insert mode.
-  execute 'normal gi'
 endfunction
 
