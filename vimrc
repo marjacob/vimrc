@@ -115,31 +115,16 @@ if has('vim_starting')
     set nofoldenable
   endif
 
-  if has('statusline')
-    set laststatus=2
-    set showtabline=2
-
-    if empty(&g:statusline)
-      set statusline=
-            \[%n]
-            \[%{mode()}]
-            \%{&paste?'\ PASTE':''}
-            \\ %<%.99f
-            \\ %y%h%w%m%r%=%-14.(%l,%c%V%)
-            \\ %P
-    endif
-
-    if has('title')
-      set iconstring=
-            \%{empty(v:servername)?v:progname\ :\ v:servername}
-            \%{exists('$SSH_TTY')?'@'.hostname():''}
-      set titlestring=
-            \%{v:progname}
-            \%(\ %)
-            \%{empty(v:servername)?'':'--servername\ '.v:servername.'\ '}
-            \%{fnamemodify(getcwd(),':~')}
-            \%{exists('$SSH_TTY')?'\ <'.hostname().'>':''}
-    endif
+  if has('statusline') && has('title')
+    set iconstring=
+          \%{empty(v:servername)?v:progname\ :\ v:servername}
+          \%{exists('$SSH_TTY')?'@'.hostname():''}
+    set titlestring=
+          \%{v:progname}
+          \%(\ %)
+          \%{empty(v:servername)?'':'--servername\ '.v:servername.'\ '}
+          \%{fnamemodify(getcwd(),':~')}
+          \%{exists('$SSH_TTY')?'\ <'.hostname().'>':''}
   endif
 
   if has('syntax')
@@ -240,6 +225,10 @@ imap <C-space> <Plug>(asyncomplete_force_refresh)
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+
+" vim-airline/vim-airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'solarized'
 
 " ..... autocommands .........................................................
 
