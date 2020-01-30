@@ -167,6 +167,7 @@ nnoremap <silent> <Leader>ep :e! ~/.profile<CR>
 nnoremap <silent> <Leader>es :e! ~/.ssh/config<CR>
 nnoremap <silent> <Leader>et :e! ~/.tmux.conf<CR>
 nnoremap <silent> <Leader>ev :e! $MYVIMRC<CR>
+nnoremap <silent> <Leader>ez :e! ~/.zshrc<CR>
 
 " splits
 nnoremap <C-H> <C-W><C-H>
