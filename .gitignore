@@ -1,4 +1,5 @@
-.netrwhist
-bundle.tgz
-viminfo
+/.netrwhist
+/bundle.tgz
+/view/
+/viminfo
 
