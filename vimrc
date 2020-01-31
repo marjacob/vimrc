@@ -22,7 +22,7 @@ function! s:startup_gui()
   silent! colorscheme solarized8
 
   " dimensions
-  set columns=90
+  set columns=111
   set lines=32
 
   " rendering
@@ -224,6 +224,9 @@ endfor
 " Remove <> (<:>).
 let delimitMate_matchpairs = "(:),[:],{:}"
 let delimitMate_quotes = ""
+
+" rust-lang/rust.vim
+let g:rustfmt_autosave = 1
 
 " prabirshrestha/asyncomplete.vim
 imap <C-space> <Plug>(asyncomplete_force_refresh)
