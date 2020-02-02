@@ -8,8 +8,18 @@ endfunction
 function! s:setup()
   setlocal autoindent
   setlocal formatoptions=antw
-  setlocal linebreak nolist wrap
   setlocal textwidth=76
+
+  " Use tab as four spaces.
+  set expandtab
+  set shiftwidth=4
+  set softtabstop=4
+  set tabstop=4
+
+  " Wrap lines on words, not characters.
+  setlocal linebreak
+  setlocal nolist
+  setlocal wrap
 
   " Support [æøåÆØÅ] with any keyboard layout.
   inoremap <buffer> <silent> <Leader>" Æ
@@ -19,6 +29,8 @@ function! s:setup()
   inoremap <buffer> <silent> <Leader>[ å
   inoremap <buffer> <silent> <Leader>{ Å
 
+  " Generate Markdown headings.
+  " See https://github.com/junegunn/dotfiles/blob/4330c45/vimrc#L494
   nnoremap <Leader>1 m`yypVr=``
   nnoremap <Leader>2 m`yypVr-``
   nnoremap <Leader>3 m`^i### <esc>``4l
