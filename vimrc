@@ -247,5 +247,10 @@ augroup vimrc
     autocmd CmdlineEnter * set hlsearch
     autocmd CmdlineLeave * set nohlsearch
   endif
+
+  " clang-format
+  autocmd BufWritePre *.{c,c++,cc,cpp,cxx,h,h++,hh,hpp,hxx}
+    \ :call clang#format()
+
 augroup end
 
