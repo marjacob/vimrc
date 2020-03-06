@@ -14,6 +14,10 @@ clean:
 init:
 	@git submodule update --init --recursive
 
+.PHONY: size
+size:
+	@du -hs pack/submodules/start/* | sort -hr
+
 .PHONY: update
 update:
 	@git submodule foreach git pull origin master
