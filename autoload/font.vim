@@ -6,7 +6,7 @@ function! s:font()
   elseif has('win32')
     return 'Consolas:h11,Courier New:h10'
   else
-    return 'Monospace Medium 12'
+    return 'Monospace Medium 11'
   endif
 endfunction
 
