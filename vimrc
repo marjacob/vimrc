@@ -23,7 +23,7 @@ function! s:startup_gui()
 
   " dimensions
   set columns=111
-  set lines=32
+  set lines=35
 
   " rendering
   if has('win32')
