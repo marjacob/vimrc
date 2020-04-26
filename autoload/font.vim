@@ -2,11 +2,11 @@
 
 function! s:font()
   if has('mac')
-    return 'Monaco:h12'
+    return 'Monaco:h9'
   elseif has('win32')
-    return 'Consolas:h11,Courier New:h10'
+    return 'Consolas:h9,Courier New:h8'
   else
-    return 'Monospace Medium 11'
+    return 'Monospace Medium 9'
   endif
 endfunction
 
