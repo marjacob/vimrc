@@ -5,6 +5,6 @@ function! s:setup()
   setlocal tabstop=2
 endfunction
 
-autocmd BufNewFile,BufRead *.sls setfiletype yaml
+autocmd BufNewFile,BufRead *.sls,.clang-format setfiletype yaml
 autocmd FileType yaml call s:setup()
 
