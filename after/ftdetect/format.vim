@@ -1,20 +1,14 @@
 function s:format()
-  let b:view = winsaveview()
+  let l:view = winsaveview()
   execute 'normal! gggqG'
-  call winrestview(b:view)
-  unlet b:view
+  keeppatterns %s/\s\+$//e
+  call winrestview(l:view)
 endfunction
 
 function! s:setup()
   setlocal autoindent
   setlocal formatoptions=antw
   setlocal textwidth=76
-
-  " Use tab as four spaces.
-  set expandtab
-  set shiftwidth=4
-  set softtabstop=4
-  set tabstop=4
 
   " Wrap lines on words, not characters.
   setlocal linebreak
@@ -28,6 +22,29 @@ function! s:setup()
   inoremap <buffer> <silent> <Leader>; ø
   inoremap <buffer> <silent> <Leader>[ å
   inoremap <buffer> <silent> <Leader>{ Å
+endfunction
+
+function! s:setup_latex()
+  call s:setup()
+
+  "setlocal formatlistpat='^\s*\\(item\|end\|begin)*\s*'
+  setlocal formatoptions+=n
+
+  " Use tab as two spaces.
+  set expandtab
+  set shiftwidth=2
+  set softtabstop=2
+  set tabstop=2
+endfunction
+
+function! s:setup_markdown()
+  call s:setup()
+
+  " Use tab as four spaces.
+  set expandtab
+  set shiftwidth=4
+  set softtabstop=4
+  set tabstop=4
 
   " Generate Markdown headings.
   " See https://github.com/junegunn/dotfiles/blob/4330c45/vimrc#L494
@@ -38,6 +55,7 @@ function! s:setup()
   nnoremap <Leader>5 m`^i##### <esc>``6l
 endfunction
 
-autocmd BufWritePre *.md call s:format()
-autocmd FileType markdown call s:setup()
+autocmd BufWritePre *.{md,tex} call s:format()
+autocmd FileType markdown call s:setup_markdown()
+autocmd FileType tex call s:setup_latex()
 
