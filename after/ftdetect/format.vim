@@ -1,8 +1,8 @@
 function s:format()
-  let l:view = winsaveview()
+  let b:view = winsaveview()
   execute 'normal! gggqG'
   keeppatterns %s/\s\+$//e
-  call winrestview(l:view)
+  call winrestview(b:view)
 endfunction
 
 function! s:setup()
@@ -31,20 +31,20 @@ function! s:setup_latex()
   setlocal formatoptions+=n
 
   " Use tab as two spaces.
-  set expandtab
-  set shiftwidth=2
-  set softtabstop=2
-  set tabstop=2
+  setlocal expandtab
+  setlocal shiftwidth=2
+  setlocal softtabstop=2
+  setlocal tabstop=2
 endfunction
 
 function! s:setup_markdown()
   call s:setup()
 
   " Use tab as four spaces.
-  set expandtab
-  set shiftwidth=4
-  set softtabstop=4
-  set tabstop=4
+  setlocal expandtab
+  setlocal shiftwidth=4
+  setlocal softtabstop=4
+  setlocal tabstop=4
 
   " Generate Markdown headings.
   " See https://github.com/junegunn/dotfiles/blob/4330c45/vimrc#L494
