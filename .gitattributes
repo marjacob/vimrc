@@ -1,6 +1,0 @@
-# Normalize text file line endings.
-* text=auto
-
-# Use LF by default.
-* text eol=lf
-
