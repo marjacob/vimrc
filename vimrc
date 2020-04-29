@@ -96,10 +96,6 @@ if has('vim_starting')
   set notimeout
   set ttimeout
 
-  if has('autochdir')
-    set noautochdir
-  endif
-
   if has('cindent')
     set cindent
   endif
