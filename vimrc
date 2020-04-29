@@ -115,18 +115,6 @@ if has('vim_starting')
     set nofoldenable
   endif
 
-  if has('statusline') && has('title')
-    set iconstring=
-          \%{empty(v:servername)?v:progname\ :\ v:servername}
-          \%{exists('$SSH_TTY')?'@'.hostname():''}
-    set titlestring=
-          \%{v:progname}
-          \%(\ %)
-          \%{empty(v:servername)?'':'--servername\ '.v:servername.'\ '}
-          \%{fnamemodify(getcwd(),':~')}
-          \%{exists('$SSH_TTY')?'\ <'.hostname().'>':''}
-  endif
-
   if has('syntax')
     set colorcolumn=+1
   endif
