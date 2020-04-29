@@ -16,7 +16,6 @@ function! s:setup()
   endif
 endfunction
 
-autocmd BufNewFile,BufRead *.vim setfiletype vim
 autocmd BufWritePost $MYVIMRC so % | call s:refresh()
 autocmd FileType vim call s:setup()
 
