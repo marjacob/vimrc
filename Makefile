@@ -23,5 +23,5 @@ update:
 	@git submodule foreach git pull origin master
 
 $(bundle): Makefile README.md make.cmd vimrc .gitignore .gitmodules
-	@tar cvfz $(@) $(^) autoload bin ftdetect pack
+	@tar cvfz $(@) $(^) after autoload bin pack
 

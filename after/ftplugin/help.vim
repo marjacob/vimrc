@@ -1,6 +1,4 @@
-function! s:setup()
-  setlocal keywordprg=:help
-endfunction
+" ..... help.vim .............................................................
 
-autocmd FileType help call s:setup()
+setlocal keywordprg=:help
 
