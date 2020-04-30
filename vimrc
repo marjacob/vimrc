@@ -101,7 +101,6 @@ if has('vim_starting')
   endif
 
   if has('extra_search')
-    set hlsearch
     set incsearch
   endif
 
