@@ -223,12 +223,25 @@ let g:airline_theme = 'solarized'
 
 " ..... autocommands .........................................................
 
+function! s:command_enter()
+  if has('extra_search')
+    set hlsearch
+  endif
+endfunction
+
+function! s:command_leave()
+  if has('extra_search')
+    set nohlsearch
+  endif
+endfunction
+
 augroup vimrc
   autocmd!
-  " incsearch
-  if exists('##CmdlineEnter') && exists('##CmdlineLeave')
-    autocmd CmdlineEnter * set hlsearch
-    autocmd CmdlineLeave * set nohlsearch
+  if exists('##CmdlineEnter')
+    autocmd CmdlineEnter /,\? :call s:command_enter()
+  endif
+  if exists('##CmdlineLeave')
+    autocmd CmdlineLeave /,\? :call s:command_leave()
   endif
 augroup end
 
