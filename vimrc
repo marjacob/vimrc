@@ -202,6 +202,11 @@ for [lhs, rhs] in items(s:symbols)
   execute 'inoreabbrev' lhs rhs
 endfor
 
+" ..... ftplugin .............................................................
+
+" tex.vim
+let g:tex_flavor = "latex"
+
 " ..... plugins ..............................................................
 
 " Raimondi/delimitMate
