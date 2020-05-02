@@ -129,7 +129,7 @@ endif
 
 set pastetoggle=<F2>
 
-inoremap jk <ESC>
+inoremap jk <Esc>
 nnoremap <silent> <Leader>/ :set hlsearch!<CR>
 nnoremap <silent> <Leader>Q :q!<CR>
 nnoremap <silent> <Leader>bD :bd!<CR>
