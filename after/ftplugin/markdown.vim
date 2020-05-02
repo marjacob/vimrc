@@ -25,8 +25,10 @@ nnoremap <buffer> <LocalLeader>3 m`^i### <esc>``4l
 nnoremap <buffer> <LocalLeader>4 m`^i#### <esc>``5l
 nnoremap <buffer> <LocalLeader>5 m`^i##### <esc>``6l
 
+nnoremap <buffer> <silent> <LocalLeader>f :call format#text()<CR>
+
 augroup ftplugin.after.markdown
   autocmd!
-  autocmd BufWritePre *.md call format#text()
+  autocmd BufWritePre <buffer> call format#text()
 augroup end
 

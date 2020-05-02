@@ -17,9 +17,11 @@ else
   setlocal makeprg=make\ -C\ %:h
 endif
 
+nnoremap <buffer> <silent> <LocalLeader>f :call format#code()<CR>
+
 augroup ftplugin.after.vim
   autocmd!
-  autocmd BufWritePost $MYVIMRC so % | call s:refresh()
-  autocmd BufWritePre $MYVIMRC,*.vim call format#code()
+  autocmd BufWritePost $MYVIMRC source % | call s:refresh()
+  autocmd BufWritePre <buffer> call format#code()
 augroup end
 

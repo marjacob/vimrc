@@ -17,8 +17,10 @@ setlocal linebreak
 setlocal nolist
 setlocal wrap
 
+nnoremap <buffer> <silent> <LocalLeader>f :call format#text()<CR>
+
 augroup ftplugin.after.tex
   autocmd!
-  autocmd BufWritePre *.tex call format#text()
+  autocmd BufWritePre <buffer> call format#text()
 augroup end
 

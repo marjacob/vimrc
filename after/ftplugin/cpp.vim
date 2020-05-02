@@ -3,8 +3,10 @@
 setlocal shiftwidth=8
 setlocal tabstop=8
 
+nnoremap <buffer> <silent> <LocalLeader>f :call format#clang()<CR>
+
 augroup ftplugin.after.cpp
   autocmd!
-  autocmd BufWritePre *.{c++,cc,cpp,cxx,h++,hh,hpp,hxx} call format#clang()
+  autocmd BufWritePre <buffer> call format#clang()
 augroup end
 
