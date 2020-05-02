@@ -8,7 +8,7 @@ setlocal softtabstop=4
 setlocal tabstop=4
 setlocal textwidth=79
 
-nnoremap <buffer> <leader>f :0,$!yapf<Cr><C-o>
+nnoremap <buffer> <LocalLeader>f :0,$!yapf<Cr><C-o>
 
 augroup ftplugin.after.python
   autocmd!
