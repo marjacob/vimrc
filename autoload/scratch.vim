@@ -27,6 +27,7 @@ function! scratch#show(name, lines)
   endif
 
   nnoremap <buffer> <silent> <Esc> :bdelete!<CR>
+  nnoremap <buffer> <silent> <Space> :bdelete!<CR>
 
   augroup yapf
     autocmd!
