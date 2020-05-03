@@ -14,11 +14,11 @@ function! s:error(message) abort
 endfunction
 
 function! s:formatter_failed(formatter)
-  call s:error('Formatter ''' . a:formatter . ''' failed')
+  call s:error("Formatter \'" . a:formatter . "\' failed")
 endfunction
 
 function! s:formatter_missing(formatter)
-  call s:error('Missing formatter ''' . a:formatter . '''')
+  call s:error("Missing formatter \'" . a:formatter . "\'")
 endfunction
 
 function! format#clang()
