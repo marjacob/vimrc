@@ -136,6 +136,7 @@ nnoremap <silent> <Leader>Q :q!<CR>
 nnoremap <silent> <Leader>bD :bd!<CR>
 nnoremap <silent> <Leader>bb :call buffer#set_current()<CR>
 nnoremap <silent> <Leader>bd :bd<CR>
+nnoremap <silent> <Leader>bo :Explore<CR>
 nnoremap <silent> <Leader>be :enew!<CR>
 nnoremap <silent> <Leader>bn :bn<CR>
 nnoremap <silent> <Leader>bp :bp<CR>
