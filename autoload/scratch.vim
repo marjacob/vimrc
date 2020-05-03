@@ -23,6 +23,7 @@ function! scratch#show(name, lines)
 
   if has("syntax")
     setlocal colorcolumn=
+    setlocal cursorline
   endif
 
   nnoremap <buffer> <silent> <Esc> :bdelete!<CR>
