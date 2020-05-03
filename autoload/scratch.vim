@@ -18,9 +18,12 @@ function! scratch#show(name, lines)
   setlocal bufhidden=hide
   setlocal nobuflisted
   setlocal buftype=nofile
-  setlocal colorcolumn=
   setlocal nonumber
   setlocal noswapfile
+
+  if has("syntax")
+    setlocal colorcolumn=
+  endif
 
   nnoremap <buffer> <silent> <Esc> :bdelete!<CR>
 
