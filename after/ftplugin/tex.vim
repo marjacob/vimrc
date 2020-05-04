@@ -18,6 +18,7 @@ setlocal nolist
 setlocal wrap
 
 nnoremap <buffer> <silent> <LocalLeader>f :call format#text()<CR>
+nnoremap <buffer> <silent> <LocalLeader>p vipJvipgq
 
 augroup ftplugin.after.tex
   autocmd!
