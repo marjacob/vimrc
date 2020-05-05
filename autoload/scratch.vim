@@ -26,6 +26,7 @@ function! scratch#show(name, lines)
     setlocal cursorline
   endif
 
+  nnoremap <buffer> <silent> <CR> :bdelete!<CR>
   nnoremap <buffer> <silent> <Esc> :bdelete!<CR>
   nnoremap <buffer> <silent> <Space> :bdelete!<CR>
 
