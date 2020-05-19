@@ -28,8 +28,6 @@ function! format#clang()
     :%!clang-format
     call s:endline()
     call winrestview(l:view)
-  else
-    call s:formatter_missing(l:formatter)
   endif
 endfunction
 
@@ -68,9 +66,7 @@ endfunction
 
 function! format#yapf()
   let l:formatter = tool#yapf()
-  if empty(l:formatter)
-    call s:formatter_missing("YAPF")
-  else
+  if !empty(l:formatter)
     call s:yapf(l:formatter)
   endif
 endfunction
