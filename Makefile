@@ -8,7 +8,11 @@ bundle: $(bundle)
 
 .PHONY: clean
 clean:
+ifeq ($(OS),Windows_NT)
+	@del /f /q $(bundle) > NUL 2>&1 || exit 0
+else
 	@$(RM) $(bundle)
+endif
 
 .PHONY: init
 init:
