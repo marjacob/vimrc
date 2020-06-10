@@ -212,24 +212,25 @@ let g:tex_flavor = "latex"
 
 " ..... plugins ..............................................................
 
-" Raimondi/delimitMate
-" Remove <> (<:>).
-let delimitMate_matchpairs = "(:),[:],{:}"
-let delimitMate_quotes = ""
-
-" rust-lang/rust.vim
-let g:rustfmt_autosave = 1
-
-" prabirshrestha/asyncomplete.vim
+" asyncomplete.vim
+" https://github.com/prabirshrestha/asyncomplete.vim
 imap <C-space> <Plug>(asyncomplete_force_refresh)
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 
-" itchyny/lightline.vim
-let g:lightline = {
-      \'colorscheme': 'solarized',
-      \}
+" delimitMate
+" https://github.com/Raimondi/delimitMate
+let delimitMate_matchpairs = "(:),[:],{:}"
+let delimitMate_quotes = ""
+
+" lightline.vim
+" https://github.com/itchyny/lightline.vim
+let g:lightline = {'colorscheme': 'solarized',}
+
+" rust.vim
+" https://github.com/rust-lang/rust.vim
+let g:rustfmt_autosave = 1
 
 " ..... autocommands .........................................................
 
