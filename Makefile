@@ -1,4 +1,14 @@
 bundle := bundle.tgz
+files  := \
+	.gitignore  \
+	.gitmodules \
+	Makefile    \
+	README.md   \
+	after       \
+	autoload    \
+	bin         \
+	pack        \
+	vimrc
 
 .PHONY: all
 all: bundle
@@ -36,7 +46,6 @@ update-helptags:
 update-submodules:
 	git submodule update --remote
 
-.PHONY: $(bundle)
-$(bundle): Makefile README.md vimrc .gitignore .gitmodules
-	tar cfz $(@) $(^) after autoload bin pack
+$(bundle): $(files)
+	tar cfz $(@) $(^)
 
