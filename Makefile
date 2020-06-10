@@ -36,6 +36,7 @@ update-helptags:
 update-submodules:
 	git submodule update --remote
 
+.PHONY: $(bundle)
 $(bundle): Makefile README.md vimrc .gitignore .gitmodules
-	tar cvfz $(@) $(^) after autoload bin pack
+	tar cfz $(@) $(^) after autoload bin pack
 
