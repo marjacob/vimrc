@@ -9,22 +9,25 @@ Installation
 ```
 git clone https://github.com/marjacob/vimrc.git ~/.vim
 cd ~/.vim
-git submodule update --init --recursive
+make init
 ```
 
 ### Windows
+
+[GNU Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm)
 
 ```
 cd %userprofile%
 git clone https://github.com/marjacob/vimrc.git vimfiles
 cd vimfiles
-git submodule update --init --recursive
+make init
 ```
 
 Plugins
 -------
 
-Move to the Vim home directory with `cd %userprofile%\vimfiles` on Windows, or `cd ~/.vim` on other operating systems.
+Move to the Vim home directory with `cd %userprofile%\vimfiles` on Windows,
+or `cd ~/.vim` on other operating systems.
 
 ### Add
 
@@ -38,15 +41,16 @@ git submodule add https://github.com/tpope/vim-sensible.git
 #### Remove a plugin
 
 ```
-git submodule deinit pack/submodules/start/vim-sensible
-git rm -r pack/submodules/start/vim-sensible
-rm -r .git/modules/pack/submodules/start/vim-sensible
+git rm pack/submodules/start/vim-sensible
 ```
 
 #### Update all plugins
 
+The `update` target updates all initialized submodules and generates
+helptags.
+
 ```
-git submodule foreach git pull origin master
+make update
 ```
 
 #### Update one plugin
