@@ -49,9 +49,6 @@
 [submodule "pack/submodules/start/vim-markdown"]
 	path = pack/submodules/start/vim-markdown
 	url = https://github.com/plasticboy/vim-markdown.git
-[submodule "pack/submodules/start/vim-flake8"]
-	path = pack/submodules/start/vim-flake8
-	url = https://github.com/nvie/vim-flake8.git
 [submodule "pack/submodules/start/vim-toml"]
 	path = pack/submodules/start/vim-toml
 	url = https://github.com/cespare/vim-toml.git
@@ -67,3 +64,6 @@
 [submodule "pack/submodules/start/vim-fugitive"]
 	path = pack/submodules/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule "pack/submodules/start/ale"]
+	path = pack/submodules/start/ale
+	url = https://github.com/dense-analysis/ale.git
