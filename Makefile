@@ -19,7 +19,7 @@ init: init-submodules update-helptags
 
 .PHONY: init-submodules
 init-submodules:
-	@git submodule update --init --recursive
+	git submodule update --init --recursive
 
 .PHONY: size
 size:
@@ -30,12 +30,12 @@ update: update-submodules update-helptags
 
 .PHONY: update-helptags
 update-helptags:
-	@vim -c "helptags ALL" -c q
+	vim -c "helptags ALL" -c q
 
 .PHONY: update-submodules
 update-submodules:
-	@git submodule update --remote
+	git submodule update --remote
 
 $(bundle): Makefile README.md vimrc .gitignore .gitmodules
-	@tar cvfz $(@) $(^) after autoload bin pack
+	tar cvfz $(@) $(^) after autoload bin pack
 
