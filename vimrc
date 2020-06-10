@@ -132,14 +132,15 @@ endif
 set pastetoggle=<F2>
 
 inoremap jk <Esc>
+nnoremap <silent> <C-Space> :CtrlPBuffer<CR>
 nnoremap <silent> <Leader>/ :set hlsearch!<CR>
 nnoremap <silent> <Leader>Q :q!<CR>
 nnoremap <silent> <Leader>bD :bd!<CR>
 nnoremap <silent> <Leader>bb :call buffer#set_current()<CR>
 nnoremap <silent> <Leader>bd :bd<CR>
-nnoremap <silent> <Leader>bo :Explore<CR>
 nnoremap <silent> <Leader>be :enew!<CR>
 nnoremap <silent> <Leader>bn :bn<CR>
+nnoremap <silent> <Leader>bo :Explore<CR>
 nnoremap <silent> <Leader>bp :bp<CR>
 nnoremap <silent> <Leader>p :call buffer#redo_paste()<CR>
 nnoremap <silent> <Leader>q :q<CR>
