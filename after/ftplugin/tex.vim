@@ -1,5 +1,12 @@
 " ..... tex.vim ..............................................................
 
+function s:reflow()
+  let l:view = winsaveview()
+  execute 'normal! vipJvipgq'
+  keeppatterns %s/\%V\s\+\%V/ /g
+  call winrestview(l:view)
+endfunction
+
 call language#norwegian()
 
 setlocal autoindent
@@ -18,7 +25,7 @@ setlocal nolist
 setlocal wrap
 
 nnoremap <buffer> <silent> <LocalLeader>f :call format#text()<CR>
-nnoremap <buffer> <silent> <LocalLeader>p vipJvipgq
+nnoremap <buffer> <silent> <LocalLeader>p :call <SID>reflow()<CR>
 
 augroup ftplugin.after.tex
   autocmd!
