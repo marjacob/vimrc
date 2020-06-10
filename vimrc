@@ -137,7 +137,6 @@ set pastetoggle=<F2>
 
 inoremap jk <Esc>
 nnoremap <silent> <Leader>/ :set hlsearch!<CR>
-nnoremap <silent> <Leader><Space> :CtrlPBuffer<CR>
 nnoremap <silent> <Leader>Q :q!<CR>
 nnoremap <silent> <Leader>bD :bd!<CR>
 nnoremap <silent> <Leader>bb :call buffer#set_current()<CR>
@@ -223,6 +222,10 @@ imap <C-space> <Plug>(asyncomplete_force_refresh)
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+
+" ctrlp.vim
+" https://github.com/kien/ctrlp.vim
+let g:ctrlp_cmd = 'CtrlPBuffer'
 
 " delimitMate
 " https://github.com/Raimondi/delimitMate
