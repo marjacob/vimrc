@@ -22,6 +22,10 @@ function! s:startup_gui()
   set background=light
   silent! colorscheme solarized8
 
+  " lightline.vim
+  " https://github.com/itchyny/lightline.vim
+  let g:lightline = {'colorscheme': 'solarized',}
+
   " dimensions
   set columns=111
   set lines=35
@@ -224,10 +228,6 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 " https://github.com/Raimondi/delimitMate
 let delimitMate_matchpairs = "(:),[:],{:}"
 let delimitMate_quotes = ""
-
-" lightline.vim
-" https://github.com/itchyny/lightline.vim
-let g:lightline = {'colorscheme': 'solarized',}
 
 " rust.vim
 " https://github.com/rust-lang/rust.vim
