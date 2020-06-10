@@ -15,12 +15,18 @@ else
 endif
 
 .PHONY: init
-init:
+init: init-submodules update-helptags
+
+.PHONY: init-submodules
+init-submodules:
 	@git submodule update --init --recursive
 
 .PHONY: size
 size:
 	@du -hs pack/submodules/start/* | sort -hr
+
+.PHONY: update
+update: update-submodules update-helptags
 
 .PHONY: update-helptags
 update-helptags:
@@ -29,9 +35,6 @@ update-helptags:
 .PHONY: update-submodules
 update-submodules:
 	@git submodule update --remote
-
-.PHONY: update
-update: update-submodules update-helptags
 
 $(bundle): Makefile README.md vimrc .gitignore .gitmodules
 	@tar cvfz $(@) $(^) after autoload bin pack
