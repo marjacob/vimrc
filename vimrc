@@ -72,6 +72,7 @@ if has('vim_starting')
   " numbers
   set number
   set numberwidth=5
+  set relativenumber
 
   set clipboard+=unnamed
   set fileformat=unix
@@ -225,9 +226,10 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 
-" vim-airline/vim-airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'solarized'
+" itchyny/lightline.vim
+let g:lightline = {
+      \'colorscheme': 'solarized',
+      \}
 
 " ..... autocommands .........................................................
 
