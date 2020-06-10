@@ -22,10 +22,17 @@ init:
 size:
 	@du -hs pack/submodules/start/* | sort -hr
 
-.PHONY: update
-update:
-	@git submodule foreach git pull origin master
+.PHONY: update-helptags
+update-helptags:
+	@vim -c "helptags ALL" -c q
 
-$(bundle): Makefile README.md make.cmd vimrc .gitignore .gitmodules
+.PHONY: update-submodules
+update-submodules:
+	@git submodule update --remote
+
+.PHONY: update
+update: update-submodules update-helptags
+
+$(bundle): Makefile README.md vimrc .gitignore .gitmodules
 	@tar cvfz $(@) $(^) after autoload bin pack
 
