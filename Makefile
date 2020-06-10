@@ -36,11 +36,15 @@ size:
 	@du -hs pack/submodules/start/* | sort -hr
 
 .PHONY: update
-update: update-submodules update-helptags
+update: update-repository update-submodules update-helptags
 
 .PHONY: update-helptags
 update-helptags:
 	vim -c "helptags ALL" -c q
+
+.PHONY: update-repository
+update-repository:
+	git pull --rebase
 
 .PHONY: update-submodules
 update-submodules:
