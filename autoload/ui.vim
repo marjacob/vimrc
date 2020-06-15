@@ -4,13 +4,6 @@ function! s:cui()
   if has('title')
     set noicon
   endif
-
-  " Support true color in terminals other than xterm (such as tmux).
-  " See :help xterm-true-color
-  if &term ==# "screen-256color"
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  endif
 endfunction
 
 function! s:gui()
@@ -26,7 +19,7 @@ function! s:gui()
     endif
   endif
 
-  " window
+  " Remove buttons, menus, scrollbars and other noise.
   set guioptions+=a
   set guioptions+=c
   set guioptions-=L
@@ -40,6 +33,7 @@ function! s:gui()
   set guioptions-=r
 endfunction
 
+" No, seriously. I want English.
 function! s:language()
   silent! language English_United States
   silent! language en_US
@@ -47,9 +41,41 @@ function! s:language()
   silent! language en_US.UTF-8
 endfunction
 
-function! ui#init()
-  call s:language()
+function! s:theme()
+  " Try to enable support for 24-bit colors.
+  let l:tgc = 0
+  if has('termguicolors')
+    try
+      set termguicolors
+    catch /^Vim\%((\a\+)\)\=:E954/
+      let l:tgc = 1
+    endtry
+  endif
 
+  " Enable support for true color in terminals other than xterm (e.g. tmux).
+  let l:gui = has('gui_running')
+  if !l:gui && &term ==# "screen-256color"
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  endif
+
+  " Use Solarized or fall back to builtin color scheme.
+  if l:gui || (&term =~ "-256color" && !l:tgc)
+    silent! colorscheme solarized8
+  else
+    silent! colorscheme blue
+  endif
+
+  " Use matching lightline.vim theme.
+  let l:theme = get(g:, 'colors_name', 'default')
+  if l:theme ==# 'solarized8'
+    let g:lightline = {'colorscheme': 'solarized',}
+  elseif l:theme ==# 'blue'
+    let g:lightline = {'colorscheme': 'Tomorrow_Night_Blue',}
+  endif
+endfunction
+
+function! ui#init()
   if has('gui_running')
     set background=light
     call s:gui()
@@ -58,16 +84,7 @@ function! ui#init()
     call s:cui()
   endif
 
-  silent! colorscheme solarized8
-
-  if get(g:, 'colors_name', 'default') ==# 'solarized8'
-    let g:lightline = {'colorscheme': 'solarized',}
-  endif
-
-  if has('termguicolors')
-    if &term =~ "-256color"
-      set termguicolors
-    endif
-  endif
+  call s:language()
+  call s:theme()
 endfunction
 
