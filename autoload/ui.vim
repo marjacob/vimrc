@@ -58,23 +58,15 @@ function! ui#init()
     call s:cui()
   endif
 
-  if &shell[-7:] ==? 'cmd.exe'
-    silent! colorscheme blue
+  silent! colorscheme solarized8
 
-    if get(g:, 'colors_name', 'default') ==# 'blue'
-      let g:lightline = {'colorscheme': 'Tomorrow_Night_Blue',}
-    endif
-  else
-    silent! colorscheme solarized8
+  if get(g:, 'colors_name', 'default') ==# 'solarized8'
+    let g:lightline = {'colorscheme': 'solarized',}
+  endif
 
-    if get(g:, 'colors_name', 'default') ==# 'solarized8'
-      let g:lightline = {'colorscheme': 'solarized',}
-    endif
-
-    if has('termguicolors')
-      if &term =~ "-256color"
-        set termguicolors
-      endif
+  if has('termguicolors')
+    if &term =~ "-256color"
+      set termguicolors
     endif
   endif
 endfunction
