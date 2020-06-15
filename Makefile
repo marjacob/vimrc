@@ -6,7 +6,6 @@ files  := \
 	README.md   \
 	after       \
 	autoload    \
-	bin         \
 	pack        \
 	vimrc
 
@@ -52,5 +51,5 @@ update-submodules:
 	git submodule update --remote
 
 $(bundle): $(files)
-	tar cfz $(@) $(^)
+	@tar cfvz $(@) $(^)
 
