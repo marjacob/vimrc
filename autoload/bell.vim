@@ -1,7 +1,7 @@
 " ..... bell.vim .............................................................
 
-" Disable audible and visual bell.
-function! bell#disable()
+function! bell#init()
+  " Disable audible and visual bell.
   if has('gui_running')
     if has('autocmd')
       augroup disable_bell

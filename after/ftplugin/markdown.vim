@@ -1,7 +1,5 @@
 " ..... markdown.vim .........................................................
 
-call language#norwegian()
-
 setlocal autoindent
 setlocal formatoptions=antw
 setlocal textwidth=76

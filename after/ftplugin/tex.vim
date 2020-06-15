@@ -7,8 +7,6 @@ function s:reflow()
   call winrestview(l:view)
 endfunction
 
-call language#norwegian()
-
 setlocal autoindent
 setlocal formatoptions=antw
 setlocal textwidth=76

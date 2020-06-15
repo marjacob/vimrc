@@ -10,7 +10,7 @@ function! s:font()
   endif
 endfunction
 
-function! font#configure()
+function! font#init()
   let &g:guifont=substitute(&g:guifont, '^$', s:font(), '')
 endfunction
 
