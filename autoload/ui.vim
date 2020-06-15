@@ -58,7 +58,13 @@ function! ui#init()
     call s:cui()
   endif
 
-  if !has('vcon')
+  if &shell[-7:] ==? 'cmd.exe'
+    silent! colorscheme blue
+
+    if get(g:, 'colors_name', 'default') ==# 'blue'
+      let g:lightline = {'colorscheme': 'Tomorrow_Night_Blue',}
+    endif
+  else
     silent! colorscheme solarized8
 
     if get(g:, 'colors_name', 'default') ==# 'solarized8'
