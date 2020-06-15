@@ -36,12 +36,12 @@ function! mappings#init()
   nnoremap <silent> <Leader>ez :e! ~/.zprofile<CR>
 
   " norwegian
-  inoremap <buffer> <silent> <Leader>" Æ
-  inoremap <buffer> <silent> <Leader>' æ
-  inoremap <buffer> <silent> <Leader>: Ø
-  inoremap <buffer> <silent> <Leader>; ø
-  inoremap <buffer> <silent> <Leader>[ å
-  inoremap <buffer> <silent> <Leader>{ Å
+  inoremap <silent> <Leader>" Æ
+  inoremap <silent> <Leader>' æ
+  inoremap <silent> <Leader>: Ø
+  inoremap <silent> <Leader>; ø
+  inoremap <silent> <Leader>[ å
+  inoremap <silent> <Leader>{ Å
 
   " splits
   nnoremap <C-H> <C-W><C-H>
