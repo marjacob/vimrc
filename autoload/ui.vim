@@ -1,16 +1,16 @@
 " ..... ui.vim ...............................................................
 
 function! s:cui()
-  if has('title')
-    set noicon
+  " Support true color in terminals other than xterm (e.g. tmux).
+  if &term ==# "screen-256color"
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   endif
 endfunction
 
 function! s:gui()
   set columns=111
   set lines=35
-
-  call font#init()
 
   if has('win32')
     set linespace=0
@@ -31,6 +31,8 @@ function! s:gui()
   set guioptions-=l
   set guioptions-=m
   set guioptions-=r
+
+  call font#init()
 endfunction
 
 " No, seriously. I want English.
@@ -42,36 +44,33 @@ function! s:language()
 endfunction
 
 function! s:theme()
+  let l:gui = has('gui_running')
+  let l:tgc = 1
+
   " Try to enable support for 24-bit colors.
-  let l:tgc = 0
   if has('termguicolors')
     try
       set termguicolors
     catch /^Vim\%((\a\+)\)\=:E954/
-      let l:tgc = 1
+      let l:tgc = 0
     endtry
   endif
 
-  " Enable support for true color in terminals other than xterm (e.g. tmux).
-  let l:gui = has('gui_running')
-  if !l:gui && &term ==# "screen-256color"
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  endif
-
   " Use Solarized or fall back to builtin color scheme.
-  if l:gui || (&term =~ "-256color" && !l:tgc)
+  if l:gui || (&term =~ "-256color" && l:tgc)
     silent! colorscheme solarized8
   else
     silent! colorscheme blue
   endif
 
+  let g:lightline = get(g:, 'lightline', {})
+  let l:colorscheme = get(g:, 'colors_name', 'default')
+
   " Use matching lightline.vim theme.
-  let l:theme = get(g:, 'colors_name', 'default')
-  if l:theme ==# 'solarized8'
-    let g:lightline = {'colorscheme': 'solarized',}
-  elseif l:theme ==# 'blue'
-    let g:lightline = {'colorscheme': 'Tomorrow_Night_Blue',}
+  if l:colorscheme ==# 'blue'
+    let g:lightline.colorscheme = 'Tomorrow_Night_Blue'
+  elseif l:colorscheme ==# 'solarized8'
+    let g:lightline.colorscheme = 'solarized'
   endif
 endfunction
 
