@@ -4,6 +4,13 @@ function! s:cui()
   if has('title')
     set noicon
   endif
+
+  " Support true color in terminals other than xterm (such as tmux).
+  " See :help xterm-true-color
+  if &term ==# "screen-256color"
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  endif
 endfunction
 
 function! s:gui()
@@ -51,10 +58,18 @@ function! ui#init()
     call s:cui()
   endif
 
-  silent! colorscheme solarized8
+  if !has('vcon')
+    silent! colorscheme solarized8
 
-  if get(g:, 'colors_name', 'default') ==# 'solarized8'
-    let g:lightline = {'colorscheme': 'solarized',}
+    if get(g:, 'colors_name', 'default') ==# 'solarized8'
+      let g:lightline = {'colorscheme': 'solarized',}
+    endif
+
+    if has('termguicolors')
+      if &term =~ "-256color"
+        set termguicolors
+      endif
+    endif
   endif
 endfunction
 
