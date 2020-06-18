@@ -36,7 +36,7 @@ size:
 
 .PHONY: update
 update: update-repository update-submodules update-helptags
-	git status
+	git submodule --quiet status
 
 .PHONY: update-helptags
 update-helptags:
