@@ -43,9 +43,6 @@
 [submodule "pack/submodules/start/rust.vim"]
 	path = pack/submodules/start/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
-[submodule "pack/submodules/start/syntastic"]
-	path = pack/submodules/start/syntastic
-	url = https://github.com/vim-syntastic/syntastic.git
 [submodule "pack/submodules/start/vim-markdown"]
 	path = pack/submodules/start/vim-markdown
 	url = https://github.com/plasticboy/vim-markdown.git
