@@ -97,6 +97,13 @@ let g:ctrlp_cmd = 'CtrlPBuffer'
 let delimitMate_matchpairs = "(:),[:],{:}"
 let delimitMate_quotes = ""
 
+" prabirshrestha/vim-lsp
+" https://github.com/prabirshrestha
+"
+" issue #803: List index out of range when switching between unsaved buffers.
+" https://github.com/prabirshrestha/vim-lsp/issues/803
+let g:lsp_fold_enabled = 0
+
 " rust.vim
 " https://github.com/rust-lang/rust.vim
 let g:rustfmt_autosave = 1
