@@ -40,7 +40,7 @@ update: update-repository update-submodules update-helptags
 
 .PHONY: update-helptags
 update-helptags:
-	vim -c "helptags ALL" -c q
+	vim --not-a-term -c "helptags ALL" -c q
 
 .PHONY: update-repository
 update-repository:
