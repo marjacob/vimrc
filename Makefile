@@ -28,7 +28,7 @@ init: init-submodules update-helptags
 
 .PHONY: init-submodules
 init-submodules:
-	git submodule update --depth 1 --init --recursive
+	git submodule update --init
 
 .PHONY: size
 size:
@@ -48,7 +48,7 @@ update-repository:
 
 .PHONY: update-submodules
 update-submodules:
-	git submodule update --init --recursive --remote
+	git submodule update --init --remote
 
 $(bundle): $(files)
 	@tar cfvz $(@) $(^)
