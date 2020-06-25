@@ -52,4 +52,3 @@ function! buffer#set_current()
 
   return 1
 endfunction
-

@@ -8,10 +8,18 @@ setlocal softtabstop=4
 setlocal tabstop=4
 setlocal textwidth=79
 
-nnoremap <buffer> <silent> <LocalLeader>f :call format#yapf()<CR>
+if !exists('g:ale_fix_on_save')
+  let b:ale_fix_on_save = 1
+endif
 
-augroup ftplugin.after.python
-  autocmd!
-  autocmd BufWritePre <buffer> call format#yapf()
-augroup end
+" debian:
+" $ sudo apt install python3 python3-pip
+" $ sudo pip3 install python-language-server reorder-python-imports yapf
 
+let b:ale_fixers = [
+      \ 'add_blank_lines_for_python_control_statements',
+      \ 'remove_trailing_lines',
+      \ 'reorder-python-imports',
+      \ 'trim_whitespace',
+      \ 'yapf'
+      \ ]

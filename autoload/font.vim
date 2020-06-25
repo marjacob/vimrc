@@ -13,4 +13,3 @@ endfunction
 function! font#init()
   let &g:guifont=substitute(&g:guifont, '^$', s:font(), '')
 endfunction
-

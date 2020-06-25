@@ -3,10 +3,8 @@
 setlocal shiftwidth=8
 setlocal tabstop=8
 
-nnoremap <buffer> <silent> <LocalLeader>f :call format#clang()<CR>
+if !exists('g:ale_fix_on_save')
+  let b:ale_fix_on_save = 1
+endif
 
-augroup ftplugin.after.c
-  autocmd!
-  autocmd BufWritePre <buffer> call format#clang()
-augroup end
-
+let b:ale_fixers = ['clang-format']

@@ -83,6 +83,10 @@ call ui#init()
 
 " ..... ftplugin .............................................................
 
+" ale
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
+
 " tex.vim
 let g:tex_flavor = "latex"
 
@@ -131,4 +135,3 @@ augroup vimrc
     autocmd CmdlineLeave /,\? :call s:command_leave()
   endif
 augroup end
-

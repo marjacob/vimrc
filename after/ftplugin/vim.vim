@@ -24,4 +24,3 @@ augroup ftplugin.after.vim
   autocmd BufWritePost $MYVIMRC source % | call s:refresh()
   autocmd BufWritePre <buffer> call format#code()
 augroup end
-

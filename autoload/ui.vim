@@ -86,4 +86,3 @@ function! ui#init()
   call s:language()
   call s:theme()
 endfunction
-

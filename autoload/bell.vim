@@ -13,4 +13,3 @@ function! bell#init()
     set noerrorbells visualbell t_vb=
   endif
 endfunction
-

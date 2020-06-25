@@ -29,4 +29,3 @@ augroup ftplugin.after.markdown
   autocmd!
   autocmd BufWritePre <buffer> call format#text()
 augroup end
-
