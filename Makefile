@@ -1,5 +1,6 @@
 bundle := bundle.tgz
 files  := \
+	.git        \
 	.gitignore  \
 	.gitmodules \
 	Makefile    \
