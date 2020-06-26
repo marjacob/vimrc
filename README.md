@@ -23,6 +23,16 @@ cd vimfiles
 make init
 ```
 
+Setup for Python
+----------------
+
+```console
+apt install python3 python3-pip
+pip3 install python-language-server reorder-python-imports yapf
+```
+
+Refer to [python.vim](after/ftplugin/python.vim) for more context.
+
 Plugins
 -------
 
@@ -59,4 +69,3 @@ make update
 cd pack/submodules/start/vim-sensible
 git pull origin master
 ```
-
