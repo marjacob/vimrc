@@ -36,6 +36,8 @@ function! mappings#init()
   nnoremap <silent> <Leader>ez :e! ~/.zprofile<CR>
 
   " norwegian
+  inoremap <silent> <Leader>E É
+  inoremap <silent> <Leader>e é
   inoremap <silent> <Leader>" Æ
   inoremap <silent> <Leader>' æ
   inoremap <silent> <Leader>: Ø
