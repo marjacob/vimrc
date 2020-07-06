@@ -29,28 +29,23 @@ init: init-submodules update-helptags
 
 .PHONY: init-submodules
 init-submodules:
-	git submodule update --init
+	@git submodule init
 
 .PHONY: size
 size:
 	@du -hs $(shell find pack/ -maxdepth 3 -mindepth 3 -type d) | sort -h
 
 .PHONY: update
-update: update-repository update-submodules update-helptags
-	git status
+update: update-repository update-helptags
+	@git status
 
 .PHONY: update-helptags
 update-helptags:
-	vim --not-a-term -c "helptags ALL" -c q
+	@vim --not-a-term -c "helptags ALL" -c q
 
 .PHONY: update-repository
 update-repository:
-	git pull --rebase
-
-.PHONY: update-submodules
-update-submodules:
-	git submodule update --init --remote
+	@git pull --rebase --recurse
 
 $(bundle): $(files)
 	@tar cfvz $(@) $(^)
-
