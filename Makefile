@@ -45,7 +45,7 @@ update-helptags:
 
 .PHONY: update-repository
 update-repository:
-	@git pull --rebase --recurse
+	@git pull --jobs=8 --rebase --recurse-submodules
 
 $(bundle): $(files)
 	@tar cfvz $(@) $(^)
