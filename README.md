@@ -30,8 +30,8 @@ Refer to [python.vim](after/ftplugin/python.vim) for more context.
 
 ### Python and pip
 
-Execute the following on Debian **with** root privileges (`sudo`), or look
-into the [Homebrew](https://brew.sh/) package manager.
+Execute the following on Debian **with** root privileges (e.g. `sudo`), or
+look into the [Homebrew](https://brew.sh/) package manager.
 
 ```console
 apt update
@@ -46,6 +46,11 @@ privileges.
 ```console
 pip3 install --user python-language-server reorder-python-imports yapf
 ```
+
+For this to work, `${HOME}/.local/bin` has to be present in the `${PATH}`
+variable. One way to accomplish this for all local users is by inserting
+`${HOME}/.local/bin:` into the `/etc/profile` file, right after `PATH=` on
+the line immediately following the first `else`.
 
 Plugins
 -------
@@ -83,4 +88,3 @@ make update
 cd pack/submodules/start/vim-sensible
 git pull origin master
 ```
-
