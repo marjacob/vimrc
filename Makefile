@@ -31,6 +31,18 @@ init: init-submodules update-helptags
 init-submodules:
 	@git submodule update --init --recursive
 
+.PHONY: setup-pip
+setup-pip:
+	pip3 install --upgrade --user  \
+		python-language-server \
+		reorder-python-imports \
+		yapf
+
+.PHONY: setup-python
+setup-python:
+	apt update
+	apt install -y python3 python3-pip
+
 .PHONY: size
 size:
 	@du -hs $(shell find pack/ -maxdepth 3 -mindepth 3 -type d) | sort -h
@@ -53,3 +65,4 @@ update-submodules:
 
 $(bundle): $(files)
 	@tar cfvz $(@) $(^)
+
