@@ -26,12 +26,26 @@ make init
 Setup for Python
 ----------------
 
+Refer to [python.vim](after/ftplugin/python.vim) for more context.
+
+### Python and pip
+
+Execute the following on Debian **with** root privileges (`sudo`), or look
+into the [Homebrew](https://brew.sh/) package manager.
+
 ```console
-apt install python3 python3-pip
-pip3 install python-language-server reorder-python-imports yapf
+apt update
+apt install -y python3 python3-pip
 ```
 
-Refer to [python.vim](after/ftplugin/python.vim) for more context.
+### Language server and formatters
+
+Execute the following on any supported operating system **without** root
+privileges.
+
+```console
+pip3 install --user python-language-server reorder-python-imports yapf
+```
 
 Plugins
 -------
@@ -69,3 +83,4 @@ make update
 cd pack/submodules/start/vim-sensible
 git pull origin master
 ```
+
