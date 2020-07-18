@@ -14,6 +14,13 @@ function! format#code()
   call winrestview(l:view)
 endfunction
 
+function! format#reflow()
+  let l:view = winsaveview()
+  execute 'normal! vipJvipgq'
+  keeppatterns %s/\%V\s\+\%V/ /g
+  call winrestview(l:view)
+endfunction
+
 function! format#text()
   let l:view = winsaveview()
   execute 'normal! gggqG'

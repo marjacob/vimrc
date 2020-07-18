@@ -1,12 +1,5 @@
 " ..... tex.vim ..............................................................
 
-function s:reflow()
-  let l:view = winsaveview()
-  execute 'normal! vipJvipgq'
-  keeppatterns %s/\%V\s\+\%V/ /g
-  call winrestview(l:view)
-endfunction
-
 setlocal autoindent
 setlocal formatoptions=antw
 setlocal textwidth=76
@@ -23,7 +16,7 @@ setlocal nolist
 setlocal wrap
 
 nnoremap <buffer> <silent> <LocalLeader>f :call format#text()<CR>
-nnoremap <buffer> <silent> <LocalLeader>p :call <SID>reflow()<CR>
+nnoremap <buffer> <silent> <LocalLeader>p :call format#reflow()<CR>
 
 augroup ftplugin.after.tex
   autocmd!
