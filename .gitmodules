@@ -61,3 +61,6 @@
 [submodule "pack/submodules/start/ale"]
 	path = pack/submodules/start/ale
 	url = https://github.com/dense-analysis/ale.git
+[submodule "pack/submodules/start/vim-jsonc"]
+	path = pack/submodules/start/vim-jsonc
+	url = https://github.com/kevinoid/vim-jsonc.git
