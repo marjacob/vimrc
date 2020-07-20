@@ -22,3 +22,13 @@ augroup ftplugin.after.tex
   autocmd!
   autocmd BufWritePre <buffer> call format#text()
 augroup end
+
+if !exists('g:ale_fix_on_save')
+  let b:ale_fix_on_save = 1
+endif
+
+if !exists('g:ale_lint_on_save')
+  let b:ale_lint_on_save = 1
+endif
+
+let b:ale_linters = ['chktex']
