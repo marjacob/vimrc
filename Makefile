@@ -31,6 +31,11 @@ init: init-submodules update-helptags
 init-submodules:
 	@git submodule update --init --recursive
 
+.PHONY: reset-master
+reset-master:
+	@git fetch --all
+	@git reset --hard origin/master
+
 .PHONY: setup-pip
 setup-pip:
 	pip3 install --upgrade --user  \
@@ -51,6 +56,9 @@ size:
 update: update-repository update-submodules update-helptags
 	@git status
 
+.PHONY: update-force
+update-force: reset-master update
+
 .PHONY: update-helptags
 update-helptags:
 	@vim --not-a-term -c "helptags ALL" -c q
@@ -65,4 +73,3 @@ update-submodules:
 
 $(bundle): $(files)
 	@tar cfvz $(@) $(^)
-
