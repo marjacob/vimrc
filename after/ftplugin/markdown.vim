@@ -2,7 +2,7 @@
 
 setlocal autoindent
 setlocal formatoptions=antw
-setlocal textwidth=76
+setlocal textwidth=80
 
 " Use tab as four spaces.
 setlocal expandtab
@@ -25,3 +25,4 @@ nnoremap <buffer> <LocalLeader>5 m`^i##### <esc>``6l
 
 nnoremap <buffer> <silent> <LocalLeader>f :call format#text()<CR>
 nnoremap <buffer> <silent> <LocalLeader>p :call format#reflow()<CR>
+
