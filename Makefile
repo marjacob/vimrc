@@ -65,7 +65,7 @@ update-helptags:
 
 .PHONY: update-repository
 update-repository:
-	@git pull --rebase
+	@git pull --autostash --rebase
 
 .PHONY: update-submodules
 update-submodules:
