@@ -101,16 +101,16 @@ let g:ctrlp_cmd = 'CtrlPBuffer'
 
 " delimitMate
 " https://github.com/Raimondi/delimitMate
-let delimitMate_matchpairs = "(:),[:],{:}"
-let delimitMate_quotes = ""
+let g:delimitMate_matchpairs = "(:),[:],{:}"
+let g:delimitMate_quotes = ""
 
 " nerdtree
 " https://github.com/preservim/nerdtree
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeDirArrows = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeQuitOnOpen = 1
-let NERDTreeWinPos = "right"
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeWinPos = "right"
 
 " rust.vim
 " https://github.com/rust-lang/rust.vim
