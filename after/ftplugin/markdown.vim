@@ -2,7 +2,6 @@
 
 setlocal autoindent
 setlocal formatoptions=antw
-setlocal textwidth=80
 
 " Use tab as four spaces.
 setlocal expandtab
