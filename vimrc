@@ -34,6 +34,7 @@ set relativenumber
 set clipboard+=unnamed
 set fileformat=unix
 set fileformats=unix,dos
+set fillchars+=vert:\ "
 set formatoptions+=ro
 set hidden
 set ignorecase
