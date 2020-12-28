@@ -111,6 +111,13 @@ let delimitMate_quotes = ""
 " https://github.com/prabirshrestha/vim-lsp/issues/803
 let g:lsp_fold_enabled = 0
 
+" nerdtree
+" https://github.com/preservim/nerdtree
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeDirArrows = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeQuitOnOpen = 1
+
 " rust.vim
 " https://github.com/rust-lang/rust.vim
 let g:rustfmt_autosave = 1

@@ -26,6 +26,11 @@ function! mappings#init()
   inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 
+  " nerdtree
+  " https://github.com/preservim/nerdtree
+  nnoremap <C-f> :NERDTreeFind<CR>
+  nnoremap <C-n> :NERDTreeToggle<CR>
+
   " files
   nnoremap <silent> <Leader>eb :e! ~/.bashrc<CR>
   nnoremap <silent> <Leader>eg :e! ~/.gitconfig<CR>
