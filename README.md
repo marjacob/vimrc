@@ -9,7 +9,7 @@ Installation
 ```
 git clone https://github.com/marjacob/vimrc.git ~/.vim
 cd ~/.vim
-make init
+make init && make update
 ```
 
 ### Windows
@@ -20,7 +20,7 @@ make init
 cd %userprofile%
 git clone https://github.com/marjacob/vimrc.git vimfiles
 cd vimfiles
-make init
+make init && make update
 ```
 
 Setup for Python
@@ -44,7 +44,7 @@ Execute the following on any supported operating system **without** root
 privileges.
 
 ```console
-pip3 install --user python-language-server reorder-python-imports yapf
+pip3 install --user -U python-language-server reorder-python-imports yapf
 ```
 
 For this to work, `${HOME}/.local/bin` has to be present in the `${PATH}`
