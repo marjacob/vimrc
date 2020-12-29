@@ -69,7 +69,7 @@ update-repository:
 
 .PHONY: update-submodules
 update-submodules:
-	@git submodule update --jobs 8 --remote
+	@git submodule update --init --jobs 8 --remote
 
 $(bundle): $(files)
 	@tar cfvz $(@) $(^)
