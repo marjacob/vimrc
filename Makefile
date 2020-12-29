@@ -1,4 +1,5 @@
-bundle := bundle.tgz
+BUNDLE ?= bundle
+bundle := $(BUNDLE).tgz
 files  := \
 	.git        \
 	.gitignore  \
