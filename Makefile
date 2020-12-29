@@ -1,14 +1,14 @@
 BUNDLE ?= bundle
 bundle := $(BUNDLE).tgz
 files  := \
-	.git        \
-	.gitignore  \
+	.git \
+	.gitignore \
 	.gitmodules \
-	Makefile    \
-	README.md   \
-	after       \
-	autoload    \
-	pack        \
+	Makefile \
+	README.md \
+	after \
+	autoload \
+	pack \
 	vimrc
 
 .PHONY: all
