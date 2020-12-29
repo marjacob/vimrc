@@ -109,6 +109,7 @@ let g:delimitMate_quotes = ""
 " https://github.com/preservim/nerdtree
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeDirArrows = 1
+let g:NERDTreeIgnore = ['\c^ntuser\..*', '\~$']
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeWinPos = "right"
