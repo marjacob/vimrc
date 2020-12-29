@@ -11,6 +11,12 @@ files  := \
 	pack \
 	vimrc
 
+define unlink
+$(if $(filter $(OS),Windows_NT),\
+	del /f /q "$(1)" > NUL 2>&1 || exit 0,\
+	$(RM) "$(1)")
+endef
+
 .PHONY: all
 all: bundle
 
@@ -19,11 +25,7 @@ bundle: $(bundle)
 
 .PHONY: clean
 clean:
-ifeq ($(OS),Windows_NT)
-	@del /f /q $(bundle) > NUL 2>&1 || exit 0
-else
-	@$(RM) $(bundle)
-endif
+	@$(call unlink,$(bundle))
 
 .PHONY: init
 init: init-submodules update-helptags
