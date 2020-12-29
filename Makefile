@@ -2,6 +2,7 @@ BUNDLE ?= bundle
 bundle := $(BUNDLE).tgz
 files  := \
 	.git \
+	.github \
 	.gitignore \
 	.gitmodules \
 	Makefile \
@@ -9,6 +10,7 @@ files  := \
 	after \
 	autoload \
 	pack \
+	tar.cmd \
 	vimrc
 
 define unlink
