@@ -92,7 +92,7 @@ let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
 let g:asmsyntax = 'nasm'
 
 " tex.vim
-let g:tex_flavor = "latex"
+let g:tex_flavor = 'latex'
 
 " ..... plugins ..............................................................
 
