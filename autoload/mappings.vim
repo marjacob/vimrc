@@ -28,8 +28,8 @@ function! mappings#init()
 
   " nerdtree
   " https://github.com/preservim/nerdtree
-  nnoremap <C-f> :NERDTreeFind<CR>
-  nnoremap <C-n> :NERDTreeToggle<CR>
+  nnoremap <silent> <C-f> :NERDTreeFind<CR>
+  nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 
   " files
   nnoremap <silent> <Leader>eb :e! ~/.bashrc<CR>
