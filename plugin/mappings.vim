@@ -1,3 +1,8 @@
+let mapleader = ","
+let maplocalleader = ";"
+
+nnoremap \ ,
+
 set pastetoggle=<F2>
 
 inoremap jk <Esc>
