@@ -82,49 +82,6 @@ call bell#init()
 call mappings#init()
 call ui#init()
 
-" ..... ftplugin .............................................................
-
-" ale
-let g:ale_fix_on_save = 1
-let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
-
-" asm.vim
-let g:asmsyntax = 'nasm'
-
-" tex.vim
-let g:tex_flavor = 'latex'
-
-" ..... plugins ..............................................................
-
-" ctrlp.vim
-" https://github.com/kien/ctrlp.vim
-let g:ctrlp_cmd = 'CtrlPBuffer'
-
-" delimitMate
-" https://github.com/Raimondi/delimitMate
-let g:delimitMate_matchpairs = "(:),[:],{:}"
-let g:delimitMate_quotes = ""
-
-" nerdtree
-" https://github.com/preservim/nerdtree
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeIgnore = ['\c^ntuser\..*', '\~$']
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeQuitOnOpen = 1
-let g:NERDTreeWinPos = "right"
-
-" rust.vim
-" https://github.com/rust-lang/rust.vim
-let g:rustfmt_autosave = 1
-
-" vim-lsp
-" https://github.com/prabirshrestha/vim-lsp
-"
-" issue #803: List index out of range when switching between unsaved buffers.
-" https://github.com/prabirshrestha/vim-lsp/issues/803
-let g:lsp_fold_enabled = 0
-
 " ..... autocommands .........................................................
 
 function! s:command_enter()
