@@ -27,7 +27,6 @@ if has('vim_starting')
   set infercase
   set magic
   set mouse=a
-  set noshowmode
   set noswapfile
   set nowrap
   set report=0
