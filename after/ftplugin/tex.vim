@@ -1,5 +1,3 @@
-" ..... tex.vim ..............................................................
-
 setlocal autoindent
 setlocal formatoptions=antw
 setlocal textwidth=76

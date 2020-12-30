@@ -1,5 +1,3 @@
-" ..... vim.vim ..............................................................
-
 function! s:refresh()
   redraw!
   redrawstatus!

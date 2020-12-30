@@ -1,5 +1,3 @@
-" ..... mappings.vim .........................................................
-
 set pastetoggle=<F2>
 
 inoremap jk <Esc>

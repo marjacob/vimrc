@@ -1,5 +1,3 @@
-" ..... bell.vim .............................................................
-
 " Disable audible and visual bell.
 if has('gui_running')
   if has('autocmd')

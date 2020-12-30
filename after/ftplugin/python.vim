@@ -1,5 +1,3 @@
-" ..... python.vim ...........................................................
-
 setlocal autoindent
 setlocal expandtab
 setlocal fileformat=unix

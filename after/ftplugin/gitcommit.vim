@@ -1,5 +1,3 @@
-" ..... gitcommit.vim ........................................................
-
 setlocal textwidth=72
 
 if has('syntax')

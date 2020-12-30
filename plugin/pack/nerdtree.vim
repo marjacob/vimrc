@@ -1,6 +1,3 @@
-" nerdtree
-" https://github.com/preservim/nerdtree
-
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeIgnore = ['\c^ntuser\..*', '\~$']

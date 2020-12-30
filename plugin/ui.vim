@@ -1,5 +1,3 @@
-" ..... ui.vim ...............................................................
-
 function! s:cui()
   " Support true color in terminals other than xterm (e.g. tmux).
   if &term ==# "screen-256color"

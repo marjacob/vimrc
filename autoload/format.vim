@@ -1,5 +1,3 @@
-" ..... format.vim ...........................................................
-
 function! s:endline()
   if getline('$') !~ "^$"
     call append(line('$'), '')

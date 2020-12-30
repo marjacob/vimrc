@@ -1,5 +1,3 @@
-" ..... buffer.vim ...........................................................
-
 " Redo failed paste properly.
 function! buffer#redo_paste()
   " Undo last change.
