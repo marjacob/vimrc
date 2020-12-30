@@ -78,10 +78,6 @@ if has('virtualedit')
   set virtualedit=block
 endif
 
-call bell#init()
-call mappings#init()
-call ui#init()
-
 " ..... autocommands .........................................................
 
 function! s:command_enter()

@@ -74,15 +74,13 @@ function! s:theme()
   endif
 endfunction
 
-function! ui#init()
-  if has('gui_running')
-    set background=light
-    call s:gui()
-  else
-    set background=dark
-    call s:cui()
-  endif
+if has('gui_running')
+  set background=light
+  call s:gui()
+else
+  set background=dark
+  call s:cui()
+endif
 
-  call s:language()
-  call s:theme()
-endfunction
+call s:language()
+call s:theme()
