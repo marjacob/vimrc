@@ -82,9 +82,23 @@ def main():
     for submodule in git_modified_files("pack/"):
         if submodule:
             commit = git_submodule_hash(submodule)
-            module = basename(submodule)
+            name = basename(submodule)
             owner = git_owner(submodule)
-            message = "Update {}/{}@{}".format(owner, module, commit[:7])
+
+            if not (commit and name and owner):
+                if args.test:
+                    print("SUBMODULE {{commit: {},\n" \
+                            "             name: {},\n " \
+                            "           owner: {},\n " \
+                            "            path: {}}}"
+                            .format(commit, name, owner, submodule))
+
+                continue
+
+            if args.test:
+                print("Would create commit:", end =" ")
+
+            message = "Update {}/{}@{}".format(owner, name, commit[:7])
 
             if not args.test:
                 if git_commit(submodule, message):
