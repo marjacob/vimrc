@@ -14,14 +14,9 @@ def git_modified_files(file):
     command = ["git", "ls-files", "--modified", file]
 
     try:
-        output = subprocess.check_output(command)
-    except subprocess.CalledProcessError:
+        return subprocess.check_output(command).decode().split('\n')
+    except (subprocess.CalledProcessError, UnicodeError):
         return None
-
-    try:
-        return output.decode().split('\n')
-    except UnicodeError:
-        pass
 
     return None
 
@@ -34,13 +29,8 @@ def git_submodule_hash(file):
             r"(?P<tag>.+)\)$"
 
     try:
-        output = subprocess.check_output(command)
-    except subprocess.CalledProcessError:
-        return None
-
-    try:
-        subject = output.decode()
-    except UnicodeError:
+        subject = subprocess.check_output(command).decode()
+    except (subprocess.CalledProcessError, UnicodeError):
         return None
 
     match = re.search(regex, subject)
@@ -55,16 +45,11 @@ def git_owner(file):
     command = ["git", "-C", file, "remote", "get-url", "origin"]
     regex = r"^(?:git@|https?://).+(?::|/)" \
             r"(?P<user>.+)/" \
-            r"(?P<name>.+)(\.git)?$"
+            r"(?P<name>.+)(?:\.git)?$"
 
     try:
-        output = subprocess.check_output(command)
-    except subprocess.CalledProcessError:
-        return None
-
-    try:
-        subject = output.decode()
-    except UnicodeError:
+        subject = subprocess.check_output(command).decode()
+    except (subprocess.CalledProcessError, UnicodeError):
         return None
 
     match = re.search(regex, subject)
