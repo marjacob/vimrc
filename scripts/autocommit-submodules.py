@@ -96,7 +96,7 @@ def main():
                 continue
 
             if args.test:
-                print("Would create commit:", end =" ")
+                print("Would commit:", end =" ")
 
             message = "Update {}/{}@{}".format(owner, name, commit[:7])
 
