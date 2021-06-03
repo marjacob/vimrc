@@ -10,6 +10,8 @@ files  := \
 	after \
 	autoload \
 	pack \
+	plugin \
+	scripts \
 	tar.cmd \
 	vimrc
 
